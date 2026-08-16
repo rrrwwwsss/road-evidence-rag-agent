@@ -1,6 +1,6 @@
-# 智扫通机器人智能客服
+# 非现场取证线索库智能查询系统
 
-> 基于 LangChain ReAct Agent + RAG 的扫地机器人专业智能客服系统
+> 基于 LangChain ReAct Agent 的道路/现场取证智能查询系统，集成 **RAG 知识库（Dify）**、**SQL 案件数据库查询**、**Qwen-VL 图片违法识别** 与 **执法报告生成**。
 
 ---
 
@@ -8,36 +8,24 @@
 
 - [项目简介](#项目简介)
 - [核心功能与架构](#核心功能与架构)
-  - [整体架构](#整体架构)
-  - [ReAct Agent](#react-agent)
-  - [RAG 知识库检索](#rag-知识库检索)
-  - [工具（Tools）](#工具tools)
-  - [中间件（Middleware）](#中间件middleware)
-  - [动态提示词切换](#动态提示词切换)
 - [项目结构](#项目结构)
 - [快速开始](#快速开始)
-  - [环境要求](#环境要求)
-  - [安装依赖](#安装依赖)
-  - [配置环境变量](#配置环境变量)
-  - [初始化知识库](#初始化知识库)
-  - [启动应用](#启动应用)
 - [使用说明](#使用说明)
-  - [Web 界面使用](#web-界面使用)
-  - [直接调用 Agent](#直接调用-agent)
-  - [示例问答](#示例问答)
 - [配置说明](#配置说明)
+- [RAG 检索评估](#rag-检索评估)
+- [注意事项与安全](#注意事项与安全)
 - [技术栈](#技术栈)
 
 ---
 
 ## 项目简介
 
-**智扫通机器人智能客服** 是一个专为扫地机器人和扫拖一体机器人用户打造的 AI 客服系统。系统具备自主的 ReAct（Reasoning + Acting）思考与工具调用能力，能够：
+系统面向道路/现场取证、证据检索与执法辅助场景，以 ReAct（Reasoning + Acting）Agent 为核心，根据用户问题自动路由到合适的工具：
 
-- 🤖 **专业问答**：回答扫地/扫拖机器人的选购建议、使用技巧、故障排查、维护保养等专业问题。
-- 🌤️ **环境感知**：结合用户所在城市的实时天气，判断环境是否适合机器人工作。
-- 📊 **使用报告**：自动获取用户 ID 与月份，查询历史使用记录，生成个性化的机器人使用情况报告与保养建议。
-- 💬 **流式对话**：支持 Streamlit Web 界面与终端命令行两种交互方式，均以流式输出实现打字机效果。
+- 🧠 **RAG 知识库检索**：判定标准、法规依据、历史案例相似度（对接 Dify 知识库，支持 `doc_type=standard/case` 元数据过滤）；
+- 🗄️ **SQL 案件查询**：自然语言转只读 SQL，查询案件数据库（计数、按时间/支队/地点/违法类型统计）；
+- 🖼️ **视觉违法识别**：上传图片调用 Qwen-VL 识别违法行为，可结合 RAG 判定标准进行“是否属于道路养护”等判定；
+- 📋 **执法报告生成**：基于 SQL 统计 + RAG 证据自动生成 Markdown 执法/取证报告草稿。
 
 ---
 
@@ -46,153 +34,93 @@
 ### 整体架构
 
 ```
-┌──────────────────────────────────────────┐
-│          Streamlit Web UI (app.py)        │
-└───────────────────┬──────────────────────┘
-                    │ 用户输入（自然语言）
-┌───────────────────▼──────────────────────┐
-│          ReAct Agent (agent/)             │
-│                                          │
-│  系统提示词 ──► LLM ──► 工具调用决策      │
-│                  ▲           │           │
-│  中间件拦截 ◄────┘    Tools / Middleware  │
-└───┬───────────────────────┬──────────────┘
-    │                       │
-    ▼                       ▼
-┌───────────┐       ┌───────────────────┐
-│ RAG 模块  │       │   外部工具调用     │
-│ (rag/)    │       │                   │
-│           │       │ • get_weather     │
-│ Chroma    │       │ • get_user_id     │
-│ 向量数据库 │       │ • get_user_location│
-│           │       │ • fetch_external  │
-│ 知识库文档 │       │   _data           │
-└───────────┘       └───────────────────┘
-    │
-┌───▼──────────────────────────────────────┐
-│  知识库文档（data/）                       │
-│  • 扫地机器人100问（PDF + TXT）            │
-│  • 扫拖一体机器人100问                    │
-│  • 故障排除指南                           │
-│  • 维护保养手册                           │
-│  • 选购指南                               │
-└──────────────────────────────────────────┘
+                Streamlit Web UI (app.py，支持文字 + 图片上传)
+                               │ 用户输入
+                               ▼
+                 ReAct Agent (agent/react_agent.py)
+                               │
+          ┌────────────────────┼─────────────────────┐
+          ▼                    ▼                     ▼
+   rag_summarize          sql_query           vision_analyze
+   (Dify 知识库检索)      (SQLite 查询)        (Qwen-VL 识别)
+          │                    │                     │
+          └────────────────────┼─────────────────────┘
+                               ▼
+                  生成最终回答 / Markdown 报告
 ```
 
-### ReAct Agent
+### ReAct Agent 与工具路由
 
-Agent 采用 **ReAct（Reasoning + Acting）** 架构，严格遵循「思考 → 行动 → 观察 → 再思考」的循环流程：
+Agent 由 `langchain.agents.create_agent` 组装，注册 4 个工具，并根据系统提示词（`prompts/main_prompt.txt`）自动路由：
 
-1. **思考（Reasoning）**：分析用户问题，判断需要调用哪些工具、按什么顺序调用。
-2. **行动（Acting）**：调用工具获取信息（天气、用户数据、知识库等）。
-3. **观察（Observation）**：获取工具返回结果，判断信息是否足够回答问题。
-4. **生成答案**：整合所有信息，生成流畅、专业的中文回答。
-
-Agent 核心通过 `langchain.agents.create_agent` 构建，底层基于 **LangGraph** 运行。
-
-### RAG 知识库检索
-
-系统内置 **RAG（Retrieval-Augmented Generation）** 模块，将专业文档向量化后存储在 Chroma 数据库中：
-
-| 知识库文件 | 内容描述 |
-|------------|----------|
-| `扫地机器人100问.pdf` | 扫地机器人常见问题与解答 |
-| `扫地机器人100问2.txt` | 更多扫地机器人问答补充 |
-| `扫拖一体机器人100问.txt` | 扫拖一体机器人专项问答 |
-| `故障排除.txt` | 故障诊断与处理方案 |
-| `维护保养.txt` | 日常维护与保养建议 |
-| `选购指南.txt` | 机型选购建议与对比 |
-
-- **文档分块**：`chunk_size=200`，`chunk_overlap=20`
-- **Embedding 模型**：`text-embedding-v4`（阿里云 DashScope）
-- **检索策略**：相似度检索，每次返回 Top-3 相关片段
-- **去重机制**：基于 MD5 哈希，避免重复加载相同文档
-
-### 工具（Tools）
-
-Agent 配备了 7 个 LangChain 工具，覆盖从知识检索到用户数据获取的完整链路：
-
-| 工具名称 | 参数 | 功能描述 |
-|----------|------|----------|
-| `rag_summarize` | `query: str` | 从向量知识库检索相关资料并总结回答 |
-| `get_weather` | `city: str` | 获取指定城市的实时天气、湿度、降雨概率等信息 |
-| `get_user_location` | 无 | 获取当前用户所在城市名称 |
-| `get_user_id` | 无 | 获取当前用户的唯一 ID |
-| `get_current_month` | 无 | 获取当前月份（`YYYY-MM` 格式） |
-| `fetch_external_data` | `user_id: str, month: str` | 从外部系统获取指定用户在指定月份的使用记录 |
-| `fill_context_for_report` | 无 | 触发中间件注入报告生成上下文，实现提示词动态切换 |
+| 问题类型 | 路由工具 | 说明 |
+| --- | --- | --- |
+| 计数/统计/按时间·支队·地点·违法类型查询 | `sql_query(question)` | 自然语言转只读 SQL，查 `data/wupin_tanwei_dabt.db` |
+| 判定标准/法规依据/历史案例相似度 | `rag_summarize(query, doc_type="")` | Dify 检索；`doc_type` 可选 `standard`/`case` |
+| 上传图片识别违法行为 | `vision_analyze(image, question, context="")` | Qwen-VL；`image` 为图片 ID 或 URL |
+| 图片 + “是否属于道路养护”判定 | `rag_summarize` → `vision_analyze` | 强约束：先取 RAG 判定标准再交给视觉模型 |
+| 生成/查询执法报告 | `sql_query` + `rag_summarize` + `fill_context_for_report` | 报告前必须调用 `fill_context_for_report` 切换报告提示词 |
 
 ### 中间件（Middleware）
 
-系统通过 3 个中间件对 Agent 执行过程进行全链路监控与干预：
+- `monitor_tool`：记录每次工具调用与参数，并在调用 `fill_context_for_report` 后把运行时上下文 `report` 置为 `True`；
+- `log_before_model`：模型调用前输出日志；
+- `report_prompt_switch`：动态提示词切换，报告场景使用 `prompts/report_prompt.txt`，其余使用 `prompts/main_prompt.txt`。
 
-| 中间件名称 | 触发时机 | 功能描述 |
-|------------|----------|----------|
-| `monitor_tool` | 每次工具调用前后 | 记录工具名称、入参、执行结果；当 `fill_context_for_report` 被调用时，将 `context["report"]` 标记置为 `True` |
-| `log_before_model` | 每次调用 LLM 前 | 记录当前消息条数及最新消息内容，方便调试 |
-| `report_prompt_switch` | 每次生成提示词时 | 根据运行时 `context["report"]` 标记动态切换系统提示词 |
+### RAG 知识库（Dify）
 
-### 动态提示词切换
+- 检索走 Dify Dataset API：`POST /v1/datasets/{dataset_id}/retrieve`，支持 `semantic_search` / `full_text_search` / `hybrid_search`（混合检索需 Dify 配置 rerank 模型）；
+- 支持按元数据 `doc_type`（`standard`/`case`）过滤；
+- 未配置 Dify（`DIFY_API_KEY` 或 `dataset_id` 为空）时自动回退本地 Chroma 向量库。
 
-系统内置 **3 套提示词**，在不同场景下自动切换：
+### SQL 查询
 
-```
-context["report"] == False  →  使用 main_prompt.txt（通用客服提示词）
-context["report"] == True   →  使用 report_prompt.txt（报告写手提示词）
-RAG 总结链                  →  使用 rag_summarize.txt（RAG 总结专用提示词）
-```
+- `rag/sql_service.py` 内部用大模型把自然语言问题转成只读 SQL（仅放行 `SELECT/WITH`），失败自动修正重试一次；
+- 以只读模式（`mode=ro`）连接 SQLite，防止误写数据。
 
-**报告生成的固定执行链路**（由系统提示词强约束）：
+### 视觉识别
 
-```
-获取用户 ID → 获取当前月份 → fill_context_for_report → fetch_external_data → 生成报告
-```
+- `rag/vision_service.py` 调用 `qwen-vl-max`（DashScope），支持图片 ID / data URI / URL；
+- 上传图片由前端注册为 `img_xxxx`，随会话持久化。
 
 ---
 
 ## 项目结构
 
 ```
-AI_RAG_agent_project/
+├── app.py                        # Streamlit 入口（文字 + 图片上传）
 ├── agent/
-│   ├── react_agent.py          # ReactAgent 类，Agent 入口
+│   ├── react_agent.py            # ReAct Agent 组装
 │   └── tools/
-│       ├── agent_tools.py      # 7 个 LangChain 工具定义
-│       └── middleware.py       # 3 个中间件（监控、日志、提示词切换）
-├── app.py                      # Streamlit Web 应用入口
-├── config/
-│   ├── agent.yml               # Agent 配置（外部数据路径等）
-│   ├── chroma.yml              # Chroma 向量数据库配置
-│   ├── prompts.yml             # 提示词文件路径配置
-│   └── rag.yml                 # LLM 与 Embedding 模型配置
-├── data/
-│   ├── external/
-│   │   └── records.csv         # 用户使用记录数据（10 用户，多月份）
-│   ├── 扫地机器人100问.pdf
-│   ├── 扫地机器人100问2.txt
-│   ├── 扫拖一体机器人100问.txt
-│   ├── 故障排除.txt
-│   ├── 维护保养.txt
-│   └── 选购指南.txt
-├── model/
-│   └── factory.py              # LLM 与 Embedding 模型工厂
-├── prompts/
-│   ├── main_prompt.txt         # 通用客服系统提示词
-│   ├── rag_summarize.txt       # RAG 总结专用提示词
-│   └── report_prompt.txt       # 报告生成专用提示词
+│       ├── agent_tools.py        # 工具定义（rag_summarize / sql_query / vision_analyze / fill_context_for_report）
+│       └── middleware.py         # 工具监控 / 日志 / 提示词切换
 ├── rag/
-│   ├── rag_service.py          # RAG 总结服务（检索 + 链式调用）
-│   └── vector_store.py         # Chroma 向量库管理（加载、检索）
-├── utils/
-│   ├── config_handler.py       # YAML 配置加载器
-│   ├── file_handler.py         # 文件读取与 MD5 去重工具
-│   ├── logger_handler.py       # 日志配置（控制台 + 文件）
-│   ├── path_tool.py            # 绝对路径工具
-│   └── prompt_loader.py        # 提示词加载器
-├── chroma_db/                  # Chroma 向量数据库持久化目录
-├── logs/                       # 应用运行日志（按日期命名）
-├── md5.text                    # 已处理文件的 MD5 记录（去重用）
-└── .env                        # 环境变量（API Key 等，勿提交到 Git）
+│   ├── rag_service.py            # RAG 汇总（Dify 优先，Chroma 兜底）
+│   ├── dify_retriever.py         # Dify 知识库检索客户端
+│   ├── sql_service.py            # 自然语言转 SQL 查询
+│   ├── vision_service.py         # Qwen-VL 视觉分析
+│   └── vector_store.py           # 本地 Chroma 向量库构建
+├── model/factory.py              # 对话 / 嵌入 / 视觉模型工厂
+├── config/
+│   ├── agent.yml                 # SQLite 数据库路径
+│   ├── rag.yml                   # 模型名配置
+│   ├── chroma.yml                # 本地向量库参数
+│   ├── dify.yml                  # Dify 知识库配置
+│   └── prompts.yml               # 提示词文件路径
+├── prompts/
+│   ├── main_prompt.txt           # 系统提示词（工具路由）
+│   ├── rag_summarize.txt         # RAG 汇总提示词
+│   └── report_prompt.txt         # 报告生成提示词
+├── data/
+│   ├── records.csv               # 案件原始数据
+│   ├── wupin_tanwei_dabt.db      # 案件数据库（SQL 查询数据源）
+│   ├── 违法案例库/*.md           # 知识库案例文档
+│   ├── 道路养护判定标准.md       # 判定标准（Dify 中 doc_type=standard）
+│   └── 公路范围内的合法物品判定标准.md
+├── eval/                         # RAG 检索准确率评估
+│   ├── eval_retrieval.py
+│   └── test_set.jsonl
+└── 处理代码/                     # 数据处理脚本（csv→md/json、时间戳修正、删表等）
 ```
 
 ---
@@ -201,161 +129,109 @@ AI_RAG_agent_project/
 
 ### 环境要求
 
-- Python 3.10+
-- 阿里云 DashScope API Key（用于 Embedding 模型 `text-embedding-v4`）
-- OpenAI 兼容 API Key（用于 Chat 模型，支持 LongCat、OpenAI 等）
+- Python 3.10+（推荐使用 Conda 环境，如 `agent`）
+- Dify（自部署或云端）与知识库
 
 ### 安装依赖
 
 ```bash
-pip install langchain langchain-core langchain-community langchain-openai langchain-chroma
-pip install langgraph streamlit
-pip install python-dotenv pyyaml pypdf
+pip install -r requirements.txt
+# 或按需安装：
+pip install streamlit langchain langchain-openai langchain-community langchain-chroma \
+            langchain-text-splitters dashscope python-dotenv pyyaml requests pandas
 ```
 
-### 配置环境变量
+### 配置 `.env`
 
-在项目根目录创建 `.env` 文件，填入以下内容：
-
-```dotenv
-# 阿里云 DashScope API Key（用于 Embedding 模型）
-DASHSCOPE_API_KEY=your_dashscope_api_key_here
-
-# Chat 模型的 API Key 与接口地址（支持 OpenAI 兼容格式）
-OPENAI_API_KEY=your_openai_compatible_api_key_here
-OPENAI_API_BASE=https://your-api-endpoint/openai
+```env
+DASHSCOPE_API_KEY=sk-xxx          # 嵌入模型 text-embedding-v4 / 视觉模型 qwen-vl-max
+OPENAI_API_KEY=sk-xxx             # 对话模型（DeepSeek 兼容接口）
+OPENAI_API_BASE=https://api.deepseek.com
+DIFY_API_KEY=dataset-xxx          # Dify 知识库 Dataset API Key
 ```
 
-如需修改所使用的模型，编辑 `config/rag.yml`：
+### Dify 知识库配置
 
-```yaml
-# Chat 模型名称
-chat_model_name: your-chat-model-name
+1. 在 Dify 中创建知识库，上传 `data/违法案例库/*.md`（`doc_type=case`）与 `data/道路养护判定标准.md`、`data/公路范围内的合法物品判定标准.md`（`doc_type=standard`）；
+2. 在知识库「API 访问」中生成 Dataset API Key；
+3. 编辑 `config/dify.yml`：填入 `api_base`（自部署如 `http://localhost:3272/v1`）与 `dataset_id`（知识库 URL 中的 ID）。
 
-# Embedding 模型名称
-embedding_model_name: text-embedding-v4
-```
+### （可选）本地向量库
 
-### 初始化知识库
+未配置 Dify 时使用本地 Chroma 作为兜底，需先构建索引：
 
-首次运行前，需将知识库文档向量化并存入 Chroma 数据库：
-
-```bash
+```powershell
+Remove-Item chroma_db -Recurse -Force
+Clear-Content md5.text
 python rag/vector_store.py
 ```
 
-> 系统会自动读取 `data/` 目录下所有 `.txt` 和 `.pdf` 文件，分块后写入 `chroma_db/`。基于 MD5 的去重机制可确保重复执行不会重复写入。
-
 ### 启动应用
-
-**方式一：Streamlit Web 界面（推荐）**
 
 ```bash
 streamlit run app.py
 ```
 
-启动后在浏览器打开 `http://localhost:8501` 即可开始对话。
-
-**方式二：命令行终端**
-
-```bash
-python agent/react_agent.py
-```
-
-> 修改 `react_agent.py` 末尾 `__main__` 块中的查询内容以测试不同问题。
-
 ---
 
 ## 使用说明
 
-### Web 界面使用
+### Web 界面
 
-1. 启动 Streamlit 应用后，页面顶部显示「**智扫通机器人智能客服**」标题。
-2. 在底部输入框中输入问题，按 Enter 或点击发送。
-3. 系统会显示「智能客服思考中...」，随后以打字机效果流式输出回答。
-4. 对话历史会自动保留在当前会话中，支持多轮对话。
+- 文字输入：直接提问，如「擅自占用公路一共有多少条？」
+- 图片上传：点击聊天输入框的图片按钮上传 jpg/png，然后提问，如「判断一下这是不是道路养护行为」
 
-### 直接调用 Agent
+### 示例问题
 
-```python
-from agent.react_agent import ReactAgent
-
-agent = ReactAgent()
-
-# 流式输出（逐段打印）
-for chunk in agent.execute_stream("小户型适合哪款扫地机器人？"):
-    print(chunk, end="", flush=True)
-```
-
-### 示例问答
-
-**🔍 专业知识问答**
-
-```
-用户：扫地机器人迷路了怎么办？
-用户：高湿度环境适合用扫拖一体机器人吗？
-用户：HEPA 滤网多久需要更换一次？
-用户：我家有宠物，适合买哪款扫地机器人？
-```
-
-**🌤️ 天气与环境感知**
-
-```
-用户：今天深圳的天气适合用扫拖一体机器人吗？
-用户：我现在所在的城市适合开启拖地功能吗？
-```
-
-**📊 个人使用报告**
-
-```
-用户：给我生成我的使用报告
-用户：帮我查一下我的机器人上个月的使用情况
-用户：生成我 2025 年 6 月的使用报告
-```
-
-> **报告生成流程说明**：当用户请求使用报告时，Agent 会严格按照以下步骤执行：
-> 1. 调用 `get_user_id` 获取当前用户 ID
-> 2. 调用 `get_current_month`（或使用用户指定月份）
-> 3. 调用 `fill_context_for_report`（触发提示词自动切换为报告写手模式）
-> 4. 调用 `fetch_external_data` 获取用户历史使用记录
-> 5. 以 Markdown 格式生成包含使用情况与保养建议的专业报告
+- 计数统计：「擅自占用公路一共有多少条？」「2026年7月23日哪个支队最多？」
+- 判定标准：「道路养护行为的判定标准是什么？」
+- 历史案例：「与擅自占用、挖掘公路类似的历史案例有哪些？」
+- 图片识别：上传图片后问「这张图片是什么违法行为？」
+- 图片判定：上传图片后问「图中行为是否属于道路养护行为？」
+- 报告生成：「请为2026年5月密云执法队的违法案件生成一份执法报告草稿」
 
 ---
 
 ## 配置说明
 
-### `config/chroma.yml`
+| 文件 | 说明 |
+| --- | --- |
+| `config/rag.yml` | `chat_model_name`（对话）、`embedding_model_name`（嵌入）、`vision_model_name`（视觉，如 `qwen-vl-max`） |
+| `config/dify.yml` | Dify `api_base` / `dataset_id` / `search_method` / `top_k` / 阈值 |
+| `config/agent.yml` | `sqlite_db_path`：SQL 查询的数据源 |
+| `config/chroma.yml` | 本地向量库 collection / 分块参数 / `k` |
 
-| 配置项 | 默认值 | 说明 |
-|--------|--------|------|
-| `collection_name` | `agent` | Chroma 集合名称 |
-| `persist_directory` | `chroma_db` | 向量库持久化目录 |
-| `k` | `3` | 相似度检索返回的文档数量 |
-| `data_path` | `data` | 知识库文档目录 |
-| `chunk_size` | `200` | 文档分块大小（字符数） |
-| `chunk_overlap` | `20` | 相邻分块的重叠字符数 |
-| `allow_knowledge_file_type` | `[txt, pdf]` | 支持的知识库文件类型 |
+---
 
-### `config/rag.yml`
+## RAG 检索评估
 
-| 配置项 | 默认值 | 说明 |
-|--------|--------|------|
-| `chat_model_name` | `LongCat-Flash-Chat` | Chat 模型名称 |
-| `embedding_model_name` | `text-embedding-v4` | Embedding 模型名称 |
+`eval/` 目录提供**只测检索、不调用大模型**的评估脚本：
+
+```powershell
+python eval\eval_retrieval.py                 # 评估 test_set.jsonl，top_k=5
+python eval\eval_retrieval.py --top-k 3,5,10  # 对比多个 k
+python eval\eval_retrieval.py --query "道路养护行为的判定标准是什么"
+python eval\eval_retrieval.py --dump          # 查看每个问题实际召回
+```
+
+指标：`HitRate@k / Recall@k / Precision@k / MRR / NDCG@k`，按 `doc_type` 分组统计并输出失败样例。详见 `eval/README.md`。
+
+---
+
+## 注意事项与安全
+
+- **密钥保护**：`.env` 已加入 `.gitignore`，请勿提交；历史版本中若出现过密钥请尽快轮换；
+- **执法合规**：系统输出仅作为辅助参考，涉及法律定性的结论需「人工/执法部门复核」；
+- **数据最小化**：报告与对外输出遵循最小必要原则，仅展示证明性标识（案例编号、图片 URL）；
+- **Dify 依赖**：知识库检索依赖 Dify 服务可用；未配置时回退本地向量库（需要已构建索引）。
 
 ---
 
 ## 技术栈
 
-| 类别 | 技术 |
-|------|------|
-| **Agent 框架** | LangChain、LangGraph |
-| **Web UI** | Streamlit |
-| **向量数据库** | Chroma (`langchain-chroma`) |
-| **LLM** | OpenAI 兼容 Chat 模型（如 LongCat-Flash-Chat） |
-| **Embedding** | 阿里云 DashScope `text-embedding-v4` |
-| **文档处理** | PyPDFLoader、TextLoader、RecursiveCharacterTextSplitter |
-| **配置管理** | PyYAML |
-| **日志** | Python `logging`（控制台 + 文件双输出） |
-| **环境变量** | python-dotenv |
-| **去重** | Python `hashlib`（MD5） |
+- LangChain（ReAct Agent / Middleware / RAG Chain）
+- Streamlit（Web UI）
+- Dify（知识库 / 向量检索）
+- DashScope（text-embedding-v4 嵌入、qwen-vl-max 视觉）
+- DeepSeek（对话模型，OpenAI 兼容接口）
+- SQLite / Chroma / python-dotenv / pyyaml / requests
