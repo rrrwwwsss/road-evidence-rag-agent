@@ -706,3 +706,771 @@ requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272)
 2026-08-16 17:46:35,053 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「水泥罐车在公路上作业是否属于道路养护行为？」(doc_type=standard)返回 5 条
 2026-08-16 17:46:35,103 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「汛期公路抢险清障行为的认定标准」(doc_type=standard)返回 5 条
 2026-08-16 17:46:35,151 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在路灯杆上悬挂条幅、广告等物品的违法行为案例」(doc_type=case)返回 5 条
+2026-08-16 18:34:38,488 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 18:34:38,488 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 查一下有没有相关违法案例
+【上传图片：图片ID img_f5d9749b78】
+2026-08-16 18:34:46,460 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:34:46,460 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '非现场取证 违法案例 相似案例', 'doc_type': 'case'}
+2026-08-16 18:34:46,462 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:34:46,463 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路 违法行为 图片取证 案例', 'doc_type': 'case'}
+2026-08-16 18:35:01,471 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=(10, 15))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+2026-08-16 18:35:01,472 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=(10, 15))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+2026-08-16 18:35:01,478 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:35:01,481 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:35:05,657 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:35:06,070 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:35:06,071 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 18:35:06,071 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定
+
+关键缺失项：
+- 未提供用户具体询问的“道路违法行为图片取证案例”原文，无法理解需要回答的事实问题。
+- 未提供任何检索到的参考上下文（参考资料），没有可引用的事实片段。
+
+补证建议（可操作）：
+1. 请补充用户问题原文，明确是哪种违法行为（如违停、压线、逆行等）及图片取证的具体疑问。
+2. 请提供相关的参考资料片段（如现场图片描述、时间戳、地点、执法记录等），以便基于事实作答。
+3. 如需法律定性或处罚建议，请将资料转交人工/执法部门复核，本助手不推断法律结论。
+
+置信度（基于检索证据）：低（因缺少全部输入证据，无法进行事实比对）。
+2026-08-16 18:35:13,896 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 18:35:13,896 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_f5d9749b78', 'question': '请识别这张图片中的场景和主体行为，判断可能涉及哪一类公路/道路交通违法行为（例如擅自占用公路、施工未设警示标志、摆摊设点、遗洒抛撒、超限运输等），并简要描述图片中的关键要素。'}
+2026-08-16 18:35:13,896 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:35:13,897 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 18:35:13,897 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'doc_type': 'case', 'query': '擅自占用公路 施工 警示标志 案例'}
+2026-08-16 18:35:28,938 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=(10, 15))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+2026-08-16 18:35:28,950 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:35:33,701 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:35:33,703 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有7条消息。
+2026-08-16 18:35:33,703 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定
+
+基于检索参考上下文为空，无法确认“擅自占用公路”“施工”“警示标志”等事实要素，也无法提供可引用的证据片段或案例支持。
+
+关键缺失项与补证建议：
+- 缺失项：现场具体时间、地点、占用公路范围/方式，警示标志是否设置及设置位置，施工主体信息，相关案例检索来源。
+- 补证方法：立即对现场进行多角度拍摄（含道路全貌、占用区域边界、警示标志距施工点的距离及可见性），用带时间戳的相机/手机录像，并记录GPS坐标；同时联系属地公路管理机构或交通运输执法部门核实是否办理施工许可。
+2026-08-16 18:35:38,753 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:35:38,754 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '非现场取证 公路 违法行为 判定 案例 图片'}
+2026-08-16 18:35:53,768 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=15)
+2026-08-16 18:35:53,771 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:36:01,377 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:36:01,378 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有9条消息。
+2026-08-16 18:36:01,378 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定
+
+关键缺失项：
+- 未提供用户询问文本（涉及“非现场取证 公路 违法行为 判定 案例 图片”的具体问题描述）。
+- 未提供任何检索到的参考上下文（参考资料 #N 为空）。
+
+补证建议（至少一项可操作）：
+请补充上传包含现场照片、取证时间戳、地点坐标、违法行为过程描述等信息的案例材料，并明确需要判定的具体违法行为；若已有电子案卷，可提取其中“取证要素列表”和“违法行为特征描述”作为参考上下文。
+2026-08-16 18:38:33,258 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 18:38:33,259 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 先分析下图中有没有堆放物品的行为，再根据所分析的行为看下线索库中有没有相关案例
+【上传图片：图片ID img_b872cb19e6】
+2026-08-16 18:38:43,432 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:38:43,432 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '公路及公路用地范围内堆放物品 违法行为的判定标准 认定依据', 'doc_type': 'standard'}
+2026-08-16 18:38:43,435 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:38:43,435 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '公路用地范围内擅自堆放物品 违法案例', 'doc_type': 'case'}
+2026-08-16 18:39:13,451 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-16 18:39:13,452 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-16 18:39:13,456 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:39:13,458 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:39:17,059 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:39:17,364 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:39:20,078 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 18:39:20,078 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定：当前未提供任何检索参考上下文（参考资料为空），无法基于事实片段确认“公路用地范围内擅自堆放物品”的违法案例细节。
+
+关键缺失项及补证建议：
+- 缺失项：具体案例事实（如堆放物品的位置、面积、时间、行为人信息）、现场证据（照片/视频）、执法记录或处罚文书。
+- 补证建议：至少补充一张带有定位和时间戳的现场全景照片，并记录堆放物品与公路边线的相对位置；同时联系属地公路管理机构或交通执法部门调取巡查记录。  
+- 法律定性需由执法人员根据《公路法》《公路安全保护条例》等复核，请人工/执法部门确认。
+2026-08-16 18:39:26,621 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:39:26,622 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'doc_type': 'case', 'query': '堆放 堆物 占道堆物 公路堆料'}
+2026-08-16 18:39:26,622 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:39:26,623 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'doc_type': 'standard', 'query': '擅自占用公路 设置障碍物 堆放物品 违法认定'}
+2026-08-16 18:39:56,632 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-16 18:39:56,634 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:39:56,647 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-16 18:39:56,649 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 18:39:59,934 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:40:02,594 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:40:06,386 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有7条消息。
+2026-08-16 18:40:06,386 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定
+
+由于本次检索到的参考上下文为空，无法基于事实片段对“擅自占用公路、设置障碍物、堆放物品”的违法认定作出有效判断。需补充现场证据后重新分析。
+
+导致不确定的关键缺失项：
+- 现场照片/视频（反映占用行为、障碍物或堆放物品的具体状态）；
+- 占用公路的时间、地点、范围（长度、宽度）及持续时间；
+- 是否设置明显警示标识或造成交通阻碍的客观记录；
+- 相关权属证明（如公路等级、管理主体）及适用的法规条款。
+
+补证建议（至少一项）：
+- 立即使用手机或执法记录仪拍摄现场多角度照片/视频，包含周边参照物、占道物品全貌及道路通行状况，并开启时间戳与GPS定位。
+
+如需作出违法认定，请携带上述材料提交至有管辖权的交通运输综合执法部门或公安机关交通管理部门复核。本提示不能替代人工/执法部门的法律判断。
+2026-08-16 18:40:16,453 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 18:40:16,453 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_b872cb19e6', 'question': '请分析这张图片中是否存在"堆放物品"的行为：图中是否堆放了物品？若有，请描述物品的种类、堆放位置（是否位于公路路面/路肩/公路用地范围内）、堆放规模，并说明该行为是否构成公路违法堆放。', 'context': 'RAG检索结果：本次未检索到具体案例片段，参考资料为空。判定该类行为通常需参考《公路法》第四十六条（禁止在公路及公路用地范围内堆放物品等行为）及《公路安全保护条例》第十六条等禁止性规定，并结合现场证据（堆放位置距公路边缘距离、占用面积、是否影响通行、是否设置警示标志）综合认定。请仅依据图片内容客观描述所见，不得臆测图片之外的场景。'}
+2026-08-16 18:40:16,455 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 18:40:17,101 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有9条消息。
+2026-08-16 18:40:17,102 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 未找到图片 img_b872cb19e6：请确认已通过聊天输入框真实上传图片（不要手动输入图片ID），上传后重新提问。
+2026-08-16 18:51:32,549 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 18:51:32,550 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 看下这个图片中有没有在公路用地范围内设置悬挂物行为的行为
+【上传图片：图片ID img_2ad1478941】
+2026-08-16 18:51:37,295 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:51:37,295 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '公路用地范围内设置悬挂物 违法行为 判定标准 认定依据', 'doc_type': 'standard'}
+2026-08-16 18:51:37,296 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 18:51:37,296 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '公路用地范围内设置悬挂物 违法案例 相似案例', 'doc_type': 'case'}
+2026-08-16 18:51:37,648 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「公路用地范围内设置悬挂物 违法行为 判定标准 认定依据」(doc_type=standard)返回 5 条
+2026-08-16 18:51:37,648 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「公路用地范围内设置悬挂物 违法案例 相似案例」(doc_type=case)返回 5 条
+2026-08-16 18:51:50,596 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:51:54,667 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 18:52:02,600 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 18:52:02,600 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 简短结论：无法确定现有检索案例可作为“公路用地范围内设置悬挂物”的违法判例；5个相似案例均被AI识别为可疑，但最终审核结果均为“未确认违法”，不能直接证明违法行为成立。
+
+依据要点：
+- 证据：参考资料#1（案例编号356） — “模型判断：yes；最终审核结果：未确认违法”；发生地点X007平关路K26+180，违法类型为“遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品”。
+- 证据：参考资料#2（案例编号316） — “模型判断：yes；最终审核结果：未确认违法”；发生地点S213安四路K55+100，同类违法类型。
+- 证据：参考资料#3（案例编号277） — “模型判断：yes；最终审核结果：未确认违法”；发生地点S209石担路K9+900，同类违法类型。
+- 证据：参考资料#4（案例编号707） — “模型判断：yes；最终审核结果：未确认违法”；发生地点X001七大路K21+270，同类违法类型。
+- 证据：参考资料#5（案例编号53） — “模型判断：yes；最终审核结果：未确认违法”；发生地点X001七大路K22+930，同类违法类型。
+
+建议/下一步：
+1. 调取上述案例的原始图像及执法记录，核实“未确认违法”的具体原因（如证据不足、悬挂物不在公路用地范围或未危及安全）。
+2. 补充现场多角度照片（含参照物、里程桩、路侧边界），确认悬挂物是否位于公路用地范围内。
+3. 联系相关执法队（十支队平谷/怀柔/顺义、九支队门头沟）获取最终案件处理文书，以确认是否构成违法。
+
+置信度（基于检索证据）：中。影响关键因素：案例数量充分，但所有案例最终审核均为“未确认违法”，且参考资料未提供图像细节、未确认原因及最终执法结论，故不足以支持违法成立。
+2026-08-16 18:52:07,852 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 18:52:07,853 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_2ad1478941', 'question': '这张图片中是否存在在公路用地范围内设置悬挂物（如悬挂条幅、广告、装饰物于路灯杆、电线杆、交通信号杆等公路附属设施上）的行为？请识别行为类型、位置、是否危及公路安全并给出置信度。', 'context': '判定标准参考：在公路附属设施（路灯杆、电线杆、交通信号杆等处）悬挂条幅、广告、装饰物等，可能影响设施正常功能、干扰交通秩序，涉嫌"遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全"。历史案例（编号609、316、530、356、277、707、53）违法类型相同，AI识别均为yes但最终审核结果均为"未确认违法"，说明该行为成立与否需核实悬挂物是否位于公路用地范围内、是否影响设施功能或危及安全。另《公路范围内的合法物品判定标准》文档存在但内容缺失，需谨慎认定。'}
+2026-08-16 18:52:17,013 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 18:52:31,833 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有6条消息。
+2026-08-16 18:52:31,834 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | [{'text': '### 识别结论\n**行为类型**：在公路附属设施上悬挂条幅  \n**是否属于道路养护**：不属于  \n**置信度**：中等\n\n---\n\n### 判断依据\n\n1. **图片可见要素**：\n   - 图片显示的是北京-G102通燕路广场的收费站区域，上方悬挂着一条红色横幅，内容为“战马真正的功能饮料”。\n   - 该横幅悬挂在收费站的黄色龙门架结构上，龙门架属于公路附属设施的一部分。\n   - 横幅覆盖了部分龙门架顶部，可能对龙门架上的交通信号灯、监控设备或其他功能性部件产生遮挡。\n\n2. **检测框位置**：\n   - 红色横幅位于图像中央偏上的位置，明确悬挂于龙门架之上，且横跨了龙门架的主要结构。\n   - 横幅的位置和长度表明其并非临时装饰物，而是长期或半长期悬挂的广告宣传品。\n\n3. **时间线索**：\n   - 图片拍摄时间为2026年7月25日早上7:36，属于交通高峰期（根据“进京-白庙北匝车头方向”的文字信息推测）。\n   - 在交通高峰期，此类悬挂物可能对驾驶员视线造成干扰，增加交通安全风险。\n\n4. **与判定标准的对应关系**：\n   - 根据《公路范围内的合法物品判定标准》，在公路用地范围内设置悬挂物（如条幅、广告等）需符合相关规定，不得影响公路附属设施的正常功能或危及公路安全。\n   - 图片中的横幅悬挂在龙门架上，可能遮挡交通信号灯或监控设备，影响其正常功能。\n   - 历史案例（编号609、316、530、356、277、707、53）显示，AI识别结果为“yes”，但最终审核结果为“未确认违法”，说明需要进一步核实悬挂物是否位于公路用地范围内、是否影响设施功能或危及安全。\n\n5. **与参考案例的对应关系**：\n   - 图片中的悬挂物与历史案例中的情况类似，均是在公路附属设施上悬挂条幅或广告。\n   - 历史案例中，AI识别结果为“yes”，但最终审核结果为“未确认违法”，说明需要人工复核以确认悬挂物的具体影响。\n\n---\n\n### 补证建议\n\n1. **核实悬挂物的位置**：\n   - 需要进一步核实该红色横幅是否位于公路用地范围内。如果悬挂物位于公路用地范围外，则不属于违法行为。\n\n2. **评估对设施功能的影响**：\n   - 需要检查横幅是否遮挡了龙门架上的交通信号灯、监控设备或其他关键设施。如果横幅确实遮挡了这些设施，则可能影响其正常功能。\n\n3. **评估对交通安全的影响**：\n   - 需要评估横幅在交通高峰期是否对驾驶员视线造成干扰，增加交通安全风险。如果存在此类影响，则可能危及公路安全。\n\n4. **法律定性**：\n   - 如果上述核实结果显示悬挂物确实位于公路用地范围内，并且影响了公路附属设施的正常功能或危及公路安全，则应认定为违法行为。\n   - 最终定性需由人工/执法部门复核。\n\n---\n\n### 结论\n\n图片中存在在公路附属设施上悬挂条幅的行为，该行为可能影响公路附属设施的正常功能或危及公路安全，但具体是否构成违法行为需进一步核实悬挂物的位置、对设施功能的影响以及对交通安全的影响。建议相关部门进行现场核查并由执法部门复核。'}]
+2026-08-16 19:07:34,200 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 19:07:34,201 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 查找一下要素库中有没有类似的悬挂物案例
+【上传图片：图片ID img_8652a42fb6】
+2026-08-16 19:07:40,735 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 19:07:40,736 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '悬挂物', 'doc_type': 'case'}
+2026-08-16 19:07:40,736 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 19:07:40,738 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '悬挂物 违法 判定标准 认定依据', 'doc_type': 'standard'}
+2026-08-16 19:07:40,951 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「悬挂物」(doc_type=case)返回 5 条
+2026-08-16 19:07:40,998 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「悬挂物 违法 判定标准 认定依据」(doc_type=standard)返回 5 条
+2026-08-16 19:07:55,335 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 19:07:57,937 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 19:08:05,926 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 19:08:05,926 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 结论：**无法确定**。现有参考案例均显示，AI识别结果为“疑似悬挂物”，但最终审核结果全部为“未确认违法”，不足以支撑“悬挂物违法”的判定，需人工/执法部门复核。
+
+依据要点：
+- 证据：参考资料 #1（案例263） — 违法描述为“在公路附属设施如路灯杆、电线杆、交通信号杆等处悬挂条幅、广告、装饰物等，影响设施正常功能，干扰交通秩序”；AI识别结果为“yes”，但最终审核结果为“未确认违法”。
+- 证据：参考资料 #2（案例483） — 违法类型与描述同前；AI识别结果为“yes”，最终审核结果为“未确认违法”。
+- 证据：参考资料 #3（案例655） — 违法类型与描述同前；AI识别结果为“yes”，最终审核结果为“未确认违法”。
+- 证据：参考资料 #4（案例530） — 违法类型与描述同前；AI识别结果为“yes”，最终审核结果为“未确认违法”。
+- 证据：参考资料 #5（案例446） — 违法类型与描述同前；AI识别结果为“yes”，最终审核结果为“未确认违法”。
+
+建议/下一步：
+1. 调取原始高清图像，由执法人员或路政部门人工复核悬挂物是否附着于公路附属设施（如路灯杆、信号杆）并影响其正常功能。
+2. 获取同一地点、不同时段的连续影像或现场照片，确认悬挂物是否持续存在及具体位置，补充完整时间戳记录。
+3. 如仍无法判断，建议联系所属路政执法支队（如案例中涉及的怀柔、顺义、通州执法队）进行现场勘验。
+
+置信度（基于检索证据）：**中**  
+关键因素：5份参考案例高度一致地显示“AI识别yes但最终审核未确认违法”，故“无法确定”的结论证据较充分；但资料均为未确认违法的负面案例，缺少正面认定依据，且无法查看原始图像细节，因此置信度定为中。需人工复核确认。
+2026-08-16 19:08:14,422 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 19:08:14,422 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_8652a42fb6', 'question': '请分析这张图片中是否存在悬挂物（如条幅、广告、线缆、装饰物等），是否属于在公路附属设施（路灯杆、电线杆、信号杆等）上悬挂物品、影响设施正常功能的违法行为？请描述识别到的行为类型、置信度，并与历史案例中的悬挂物特征进行相似度比对。', 'context': '要素库检索结果：共检索到5份悬挂物相关历史案例——案例446（X017北木路西侧K9+200京承铁路桥，AI识别yes，检测框[[950,0,1080,150]]，最终审核未确认违法）、案例655（同一桥区附近，AI识别yes，检测框[[1070,130,1120,570]]，最终审核未确认违法）、案例228（G230通武线K1044+805大庄户村南，AI识别yes，检测框[[900,0,1200,350]]，最终审核未确认违法）、案例376（德仁务中街南口，AI识别yes，检测框[[0,0,150,250]]，最终审核未确认违法）、案例18（X001七大路K22+930大孙各庄检查站南30米，AI识别yes，检测框[[1400,240,1690,540]]，最终审核未确认违法）。判定标准资料显示，此类行为违法描述为"在公路附属设施如路灯杆、电线杆、交通信号杆等处悬挂条幅、广告、装饰物等，影响设施正常功能，干扰交通秩序"，但所有参考案例的最终审核结果均为未确认违法。请注意：若当前行为与历史相似案例匹配，而历史案例最终审核为未确认违法，则当前行为不应被直接标记为违法行为。'}
+2026-08-16 19:08:34,533 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 19:08:44,044 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有6条消息。
+2026-08-16 19:08:44,044 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | [{'text': '### 识别结论\n**行为类型**：未发现悬挂物，不属于在公路附属设施上悬挂物品的违法行为。  \n**置信度**：高（约95%）。\n\n---\n\n### 判断依据\n\n1. **图片可见要素分析**：\n   - 图片拍摄于隧道入口处，主体为一个关闭的金属卷帘门，门两侧为混凝土墙体。\n   - 隧道入口上方和右侧墙壁上有照明灯具、电线管道及标识牌等设施，但未见明显悬挂物（如条幅、广告、装饰物等）。\n   - 墙壁上的标识牌为绿色，内容为“T ID”，属于正常设置的交通或设施标识，不属于违规悬挂物。\n   - 图片中未观察到任何线缆或其他物体悬挂在路灯杆、电线杆或交通信号杆等附属设施上。\n\n2. **检测框位置与时间线索**：\n   - 图片中唯一疑似异常的区域为顶部左上角的一个红色方框标记，但该区域内未发现悬挂物，仅显示为一处结构或设备细节。\n   - 时间戳显示为“2026-07-24 12:37:22”，为未来时间，可能为测试数据或模拟场景，不影响当前分析。\n\n3. **与判定标准及参考案例的比对**：\n   - 根据提供的判定标准，违法行为描述为“在公路附属设施（如路灯杆、电线杆、交通信号杆等）上悬挂条幅、广告、装饰物等，影响设施正常功能，干扰交通秩序”。\n   - 参考案例中涉及的悬挂物特征包括：条幅、广告、装饰物等，且均被AI识别为“yes”，但最终审核结果为“未确认违法”。\n   - 本图片中未发现类似悬挂物，也未观察到任何影响设施正常功能或干扰交通秩序的行为。\n   - 因此，本图片情况与历史案例中的悬挂物特征不匹配，不存在相似性。\n\n---\n\n### 补证建议\n- 若需进一步确认，可检查隧道入口上方是否有隐蔽悬挂物，或通过更高分辨率图像进行详细分析。\n- 确认时间戳是否为真实记录，避免因未来时间导致的数据异常。\n\n---\n\n### 法律定性提示\n根据当前图像分析，未发现悬挂物及相关违法行为。若有争议或需法律定性，请移交人工/执法部门复核。'}]
+2026-08-16 19:47:36,001 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\urllib3\connection.py", line 507, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+  File "F:\Anconda\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\Lib\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\urllib3\connectionpool.py", line 538, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\Lib\site-packages\urllib3\connectionpool.py", line 369, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\Lib\site-packages\requests\adapters.py", line 690, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-16 19:48:14,356 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护行为的判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:14,516 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「如何判断一个施工作业是否属于合法的道路养护行为？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:14,684 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护施工需要同时满足哪些条件才算合法？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:14,835 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「什么情况下占用公路属于违法而不属于道路养护？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:14,998 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护作业的主体合法性和审批要求是什么？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:16,456 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的合法判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:16,604 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「公路用地范围内的物品摆放如何判定是否合法？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:16,755 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「请找出擅自占用、挖掘公路的典型案例」(doc_type=case)返回 5 条
+2026-08-16 19:48:16,925 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「与遮挡公路附属设施相关的历史案例有哪些？」(doc_type=case)返回 5 条
+2026-08-16 19:48:17,067 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内摆摊设点的案例」(doc_type=case)返回 5 条
+2026-08-16 19:48:17,227 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路范围内擅自移动井盖的案例」(doc_type=case)返回 5 条
+2026-08-16 19:48:17,406 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路用地范围内设置公路标志以外的其他标志的案例」(doc_type=case)返回 5 条
+2026-08-16 19:48:17,551 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的案例有哪些特征？」(doc_type=case)返回 5 条
+2026-08-16 19:48:17,686 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在X017康草路K0+150铁路桥附近的违法案例」(doc_type=case)返回 5 条
+2026-08-16 19:48:17,855 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在G111京漠线K77+696分水岭的违法案例」(doc_type=case)返回 5 条
+2026-08-16 19:48:17,984 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护时未设置施工警示标志，属于什么行为？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:18,135 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「擅自占用、挖掘公路与道路养护施工如何区分？」(doc_type=全部)返回 5 条
+2026-08-16 19:48:18,296 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「水泥罐车在公路上作业是否属于道路养护行为？」(doc_type=standard)返回 5 条
+2026-08-16 19:48:18,437 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「汛期公路抢险清障行为的认定标准」(doc_type=standard)返回 5 条
+2026-08-16 19:48:18,564 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在路灯杆上悬挂条幅、广告等物品的违法行为案例」(doc_type=case)返回 5 条
