@@ -1,0 +1,11 @@
+# Dify 知识库检索配置
+# api_base: 自部署地址，http://localhost:3272 对应 http://localhost:3272/v1
+# dataset_id: 知识库 ID
+# DIFY_API_KEY 放在 .env 中，值为知识库「API 访问」里生成的 Dataset API Key（dataset-xxx）
+api_base: http://localhost:3272/v1
+dataset_id: 6139944f-49de-4acc-b554-ccbf69a7b54e
+# 检索方式：semantic_search（向量）/ full_text_search（全文）/ hybrid_search（混合，需平台配置 rerank 模型）
+search_method: semantic_search
+top_k: 5
+score_threshold: 0.0
+score_threshold_enabled: false

@@ -1,0 +1,708 @@
+2026-08-16 10:16:58,886 - agent - WARNING - agent_tools.py:104 - [fetch_external_data]未能检索到案件213在2026-05月的案件记录数据
+2026-08-16 10:16:58,887 - agent - WARNING - agent_tools.py:104 - [fetch_external_data]未能检索到案件99999在2025-01月的案件记录数据
+2026-08-16 10:18:34,192 - agent - WARNING - agent_tools.py:104 - [fetch_external_data]未能检索到案件1在2025-01月的案件记录数据
+2026-08-16 10:18:51,749 - agent - WARNING - agent_tools.py:104 - [fetch_external_data]未能检索到案件1在2025-01月的案件记录数据
+2026-08-16 15:46:53,219 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 15:46:53,220 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 擅自占用公路有多少条?
+2026-08-16 15:46:56,115 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 15:46:56,115 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '擅自占用公路的违法案件一共有多少条？请统计所有表中违法类型为"擅自占用公路"的记录总数'}
+2026-08-16 15:47:19,308 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 15:47:21,832 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有3条消息。
+2026-08-16 15:47:21,832 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT
+  (SELECT COUNT(*) FROM wupin_tanwei WHERE 违法类型 LIKE '擅自占用%')
+  + (SELECT COUNT(*) FROM sixiang_weifa WHERE 违法类型 LIKE '擅自占用%')
+  + (SELECT COUNT(*) FROM results WHERE 违法类型 LIKE '擅自占用%') AS total;
+查询结果共 1 条：
+1. total=829
+2026-08-16 15:47:26,408 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 15:47:26,408 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '分别统计wupin_tanwei表、sixiang_weifa表、results表中违法类型为"擅自占用公路"或"擅自占用%"的案件各有多少条，按表分别列出数量'}
+2026-08-16 15:47:31,003 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 15:47:34,937 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有5条消息。
+2026-08-16 15:47:34,937 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT 'wupin_tanwei' AS 表名, COUNT(*) AS 数量 FROM wupin_tanwei WHERE 违法类型 LIKE '擅自占用%'
+UNION ALL
+SELECT 'sixiang_weifa' AS 表名, COUNT(*) AS 数量 FROM sixiang_weifa WHERE 违法类型 LIKE '擅自占用%'
+UNION ALL
+SELECT 'results' AS 表名, COUNT(*) AS 数量 FROM results WHERE 违法类型 LIKE '擅自占用%';
+查询结果共 3 条：
+1. 表名=wupin_tanwei, 数量=0
+2. 表名=sixiang_weifa, 数量=633
+3. 表名=results, 数量=196
+2026-08-16 16:00:41,857 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 16:00:41,858 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 生成一份2026年6月份的违法行为线索报告
+2026-08-16 16:00:49,697 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 16:00:49,698 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询2026年6月份（2026-06-01至2026-06-30）的所有案件记录，按违法类型分组统计数量，并列出各违法类型的发生地点、发生时间、所属支队、图片URL和审核结果明细'}
+2026-08-16 16:00:49,700 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 16:00:49,700 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '2026年6月非现场执法违法行为案例证据片段，违法类型、发生地点、发生时间、图片URL、AI检测结果'}
+2026-08-16 16:00:56,279 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 16:01:12,654 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 16:01:14,762 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 16:01:14,762 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定。
+
+关键缺失项：
+1. 参考上下文为空，未提供任何可引用的证据片段。
+2. 用户询问文本仅列出字段名称（违法类型、发生地点、发生时间、图片URL、AI检测结果），未包含具体数值或案例内容。
+
+补证建议：
+- 请提供至少一条包含具体违法类型、发生地点、发生时间、图片URL和AI检测结果的案例证据片段。
+- 可使用案件编号或证据编号重新进行检索，确保检索到对应的参考资料后再提交。
+2026-08-16 16:01:24,374 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 16:01:24,375 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '统计2026年6月份（2026-06-01至2026-06-30）各所属支队的案件数量，并按数量从多到少排序'}
+2026-08-16 16:01:24,378 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 16:01:24,379 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '统计2026年6月份（2026-06-01至2026-06-30）审核结果为违法（is_committed=1）的案件总数，按违法类型分组统计数量'}
+2026-08-16 16:01:24,379 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 16:01:24,381 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 16:01:24,385 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '擅自占用挖掘公路违法行为的判定标准与认定依据，历史案例'}
+2026-08-16 16:01:24,383 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '统计2026年6月份（2026-06-01至2026-06-30）各违法类型的案件总数，并按数量从多到少排序'}
+2026-08-16 16:01:24,385 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 16:01:24,390 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '遮挡公路附属设施、利用公路附属设施架设管道悬挂物品的判定标准与案例'}
+2026-08-16 16:01:27,130 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 16:01:27,194 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 16:01:28,153 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 16:01:29,705 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 16:01:39,406 - agent - WARNING - sql_service.py:124 - [sql_query]SQL执行失败，尝试修正重试：no such table: sixiang_weifa
+2026-08-16 16:02:01,966 - agent - ERROR - sql_service.py:129 - [sql_query]SQL修正后仍失败：no such table: wupin_tanwei
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 122, in query
+    rows, columns = self._execute(sql)
+                    ^^^^^^^^^^^^^^^^^^
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 106, in _execute
+    cur = conn.execute(sql)
+          ^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: sixiang_weifa
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 127, in query
+    rows, columns = self._execute(sql)
+                    ^^^^^^^^^^^^^^^^^^
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 106, in _execute
+    cur = conn.execute(sql)
+          ^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: wupin_tanwei
+2026-08-16 16:02:01,968 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 16:02:05,612 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有10条消息。
+2026-08-16 16:02:05,613 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定。
+
+**关键缺失项：**
+- 未提供任何参考资料（事实片段），无法获取“遮挡公路附属设施”“利用公路附属设施架设管道悬挂物品”的具体判定标准、违法构成要件或执法案例。
+- 缺少现场勘验记录、照片/视频、路段属性（公路等级、附属设施类型）等基础证据。
+
+**补证建议（至少一项可操作）：**
+1. 补充拍摄现场多角度照片/视频，重点显示管道或悬挂物与公路附属设施（如标志牌、护栏、桥梁伸缩缝等）的相对位置、遮挡范围及影响程度。
+2. 调取该路段公路产权部门或路政管理单位出具的附属设施权属与功能说明，确认是否属于公路附属设施。
+3. 检索或提供本地或上级公路管理机构发布的同类违法情形处置案例或裁量基准文件。
+
+如需法律定性，请向公路管理机构或执法部门人工复核。
+2026-08-16 16:02:14,547 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 16:02:14,548 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '从results表查询2026年6月份（2026-06-01至2026-06-30）的全部案件记录，按违法类型分组统计各类案件数量，按数量从多到少排列'}
+2026-08-16 16:02:14,548 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 16:02:14,551 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 16:02:14,551 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '公路法 公路安全保护条例 擅自占用公路 堆放物品 摆摊设点 违法认定依据 非现场执法'}
+2026-08-16 16:02:14,553 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '在公路上及公路用地范围内堆放物品、摆摊设点案例，检测结果，图片'}
+2026-08-16 16:02:16,263 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 16:02:21,018 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 16:02:21,509 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 16:02:24,836 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有14条消息。
+2026-08-16 16:02:24,836 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定。
+
+当前未提供任何可用的参考上下文或事实片段，因此无法基于现有信息确认“在公路上及公路用地范围内堆放物品、摆摊设点”的具体案例、检测结果或图片内容。
+
+**关键缺失项：**
+- 对应案例的文本描述或执法记录；
+- 检测结果数据或报告；
+- 现场图片或影像资料；
+- 图片来源、拍摄时间、地点、拍摄人等元信息。
+
+**补证建议（至少一项可操作）：**
+- 请补充现场照片或视频，并注明拍摄时间、地点、拍摄方向及可见的公路标志、里程桩等参照物；
+- 如已有检测报告或勘验记录，请一并提供原文或关键页面；
+- 如需进一步研判，建议联系属地公路管理机构或交通运输综合执法部门复核。
+
+需人工/执法部门复核。
+2026-08-16 16:02:32,504 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 16:02:32,504 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '非现场取证违法案例编号 AI检测结果 检测框 置信度 违法图片URL'}
+2026-08-16 16:02:32,505 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 16:02:32,505 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '统计2026年6月份results表中每天的案件数量，按日期分组排序'}
+2026-08-16 16:02:34,142 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 16:02:46,214 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 16:02:55,152 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有17条消息。
+2026-08-16 16:02:55,153 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT substr(发生时间,1,10) AS 日期, COUNT(*) AS 案件数量 FROM results WHERE 发生时间 LIKE '2026-06%' GROUP BY substr(发生时间,1,10) ORDER BY 日期;
+查询结果共 26 条：
+1. 日期=2026-06-01, 案件数量=8
+2. 日期=2026-06-02, 案件数量=14
+3. 日期=2026-06-03, 案件数量=8
+4. 日期=2026-06-04, 案件数量=9
+5. 日期=2026-06-05, 案件数量=15
+6. 日期=2026-06-06, 案件数量=4
+7. 日期=2026-06-08, 案件数量=6
+8. 日期=2026-06-09, 案件数量=20
+9. 日期=2026-06-11, 案件数量=10
+10. 日期=2026-06-12, 案件数量=2
+11. 日期=2026-06-13, 案件数量=5
+12. 日期=2026-06-14, 案件数量=5
+13. 日期=2026-06-15, 案件数量=1
+14. 日期=2026-06-16, 案件数量=3
+15. 日期=2026-06-17, 案件数量=2
+16. 日期=2026-06-19, 案件数量=2
+17. 日期=2026-06-20, 案件数量=1
+18. 日期=2026-06-22, 案件数量=3
+19. 日期=2026-06-23, 案件数量=1
+20. 日期=2026-06-24, 案件数量=6
+21. 日期=2026-06-25, 案件数量=4
+22. 日期=2026-06-26, 案件数量=6
+23. 日期=2026-06-27, 案件数量=3
+24. 日期=2026-06-28, 案件数量=2
+25. 日期=2026-06-29, 案件数量=2
+26. 日期=2026-06-30, 案件数量=1
+2026-08-16 16:03:01,799 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：fill_context_for_report
+2026-08-16 16:03:01,799 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{}
+2026-08-16 16:03:01,801 - agent - INFO - middleware.py:24 - [tool monitor]工具fill_context_for_report调用成功
+2026-08-16 16:03:02,101 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有19条消息。
+2026-08-16 16:03:02,103 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | fill_context_for_report已调用
+2026-08-16 16:03:18,262 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 16:03:18,263 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '统计2026年6月份results表中案件数量最多的前10个发生地点，按案件数量从多到少排序'}
+2026-08-16 16:03:18,263 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 16:03:18,265 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 16:03:18,265 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'http://10.212.160.162:5000/preview/wupin/camera_11000000001313975730_20260604_055758.jpg', 'question': '请分析该图片中是否在公路及公路用地范围内存在堆放物品的违法行为，如有请给出检测框坐标与置信度。'}
+2026-08-16 16:03:18,267 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'http://10.212.160.162:5000/preview/wajue/camera_11000000001316223362_20260602_140520.jpg', 'question': '请分析该图片中是否存在擅自占用、挖掘公路的违法行为，如有请给出检测框坐标与置信度。'}
+2026-08-16 16:03:18,267 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 16:03:18,269 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'http://10.212.160.162:5000/preview/xuangua/camera_11000000001318561604_20260601_032654.jpg', 'question': '请分析该图片中是否存在遮挡公路附属设施或利用公路附属设施悬挂物品的违法行为，如有请给出检测框坐标与置信度。'}
+2026-08-16 16:03:20,254 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 16:04:19,317 - agent - ERROR - vision_service.py:61 - [vision_analyze]视觉模型调用失败：request_id: 6b5e9a05-152f-9e09-b18f-8ebad5cc7d7f 
+ status_code: 400 
+ code: InvalidParameter 
+ message: <400> InternalError.Algo.InvalidParameter: Download multimodal file timed out
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\vision_service.py", line 52, in analyze
+    response = self.model.invoke([
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1865, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1672, in generate
+    self._generate_with_cache(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2010, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 674, in _generate
+    resp = self.completion_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 545, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 543, in _completion_with_retry
+    return check_response(resp)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\llms\tongyi.py", line 61, in check_response
+    raise ValueError(
+ValueError: request_id: 6b5e9a05-152f-9e09-b18f-8ebad5cc7d7f 
+ status_code: 400 
+ code: InvalidParameter 
+ message: <400> InternalError.Algo.InvalidParameter: Download multimodal file timed out
+2026-08-16 16:04:19,326 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 16:04:19,493 - agent - ERROR - vision_service.py:61 - [vision_analyze]视觉模型调用失败：request_id: 684838d7-a0b4-9bbb-bf50-3e0b006847b6 
+ status_code: 400 
+ code: InvalidParameter 
+ message: <400> InternalError.Algo.InvalidParameter: Download multimodal file timed out
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\vision_service.py", line 52, in analyze
+    response = self.model.invoke([
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1865, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1672, in generate
+    self._generate_with_cache(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2010, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 674, in _generate
+    resp = self.completion_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 545, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 543, in _completion_with_retry
+    return check_response(resp)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\llms\tongyi.py", line 61, in check_response
+    raise ValueError(
+ValueError: request_id: 684838d7-a0b4-9bbb-bf50-3e0b006847b6 
+ status_code: 400 
+ code: InvalidParameter 
+ message: <400> InternalError.Algo.InvalidParameter: Download multimodal file timed out
+2026-08-16 16:04:19,495 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 16:04:19,552 - agent - ERROR - vision_service.py:61 - [vision_analyze]视觉模型调用失败：request_id: e6664804-a21c-970e-b375-3042647dc3f2 
+ status_code: 400 
+ code: InvalidParameter 
+ message: <400> InternalError.Algo.InvalidParameter: Download multimodal file timed out
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\vision_service.py", line 52, in analyze
+    response = self.model.invoke([
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1865, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1672, in generate
+    self._generate_with_cache(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2010, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 674, in _generate
+    resp = self.completion_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 545, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "F:\Anconda\envs\agent\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 543, in _completion_with_retry
+    return check_response(resp)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_community\llms\tongyi.py", line 61, in check_response
+    raise ValueError(
+ValueError: request_id: e6664804-a21c-970e-b375-3042647dc3f2 
+ status_code: 400 
+ code: InvalidParameter 
+ message: <400> InternalError.Algo.InvalidParameter: Download multimodal file timed out
+2026-08-16 16:04:19,553 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 16:04:21,639 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有24条消息。
+2026-08-16 16:04:21,639 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 视觉模型调用失败：request_id: e6664804-a21c-970e-b375-3042647dc3f2 
+ status_code: 400 
+ code: InvalidParameter 
+ message: <400> InternalError.Algo.InvalidParameter: Download multimodal file timed out
+2026-08-16 17:12:26,086 - agent - WARNING - dify_retriever.py:35 - [DifyRetriever]未配置 DIFY_API_KEY / dataset_id / api_base，跳过 Dify 检索
+2026-08-16 17:12:53,358 - agent - ERROR - dify_retriever.py:68 - [DifyRetriever]检索失败：400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 65, in retrieve
+    resp.raise_for_status()
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+2026-08-16 17:13:08,852 - agent - INFO - dify_retriever.py:88 - [DifyRetriever]查询「擅自占用、挖掘公路」(doc_type=全部)返回 5 条
+2026-08-16 17:13:08,995 - agent - INFO - dify_retriever.py:88 - [DifyRetriever]查询「道路养护 判定标准」(doc_type=standard)返回 5 条
+2026-08-16 17:13:23,743 - agent - INFO - dify_retriever.py:88 - [DifyRetriever]查询「擅自占用、挖掘公路」(doc_type=case)返回 5 条
+2026-08-16 17:22:13,823 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 17:22:13,824 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 判断一下这是不是道路养护行为
+【上传图片：图片ID img_e44e14cbed】
+2026-08-16 17:22:20,179 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:22:20,180 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路养护行为判定标准', 'doc_type': 'standard'}
+2026-08-16 17:22:20,185 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:22:20,186 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路养护 相似历史案例', 'doc_type': 'case'}
+2026-08-16 17:22:25,488 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:22:28,570 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:22:32,166 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 17:22:32,166 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定：当前未提供可用的“用户询问文本（道路养护 相似历史案例）”及检索到的参考上下文，因此无法基于事实片段生成有效结论。
+
+关键缺失项：
+1. 用户询问的具体道路养护历史案例描述或识别特征；
+2. 检索到的参考文档/图片/视频片段及其来源、时间、地点等元数据；
+3. 需要支持的具体取证或执法决策目标（如养护责任、作业合规性、事故原因等）。
+
+补证建议（最少一项可操作）：
+- 请补充至少一份包含道路养护历史案例描述的文本，并附检索到的参考上下文（如文档编号、截图或原文链接），同时标注案例时间、地点和来源；
+- 若涉及图片/视频证据，请提供原始文件及拍摄时间、角度、定位信息，以便进行可核验的现场比对。
+
+如需对事件定责或认定法律后果，需人工/执法部门复核。
+2026-08-16 17:22:37,012 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:22:37,013 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'doc_type': 'standard', 'query': '擅自占用公路与道路养护施工的区分认定'}
+2026-08-16 17:22:37,013 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:22:37,015 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '公路养护施工 现场特征 违法行为'}
+2026-08-16 17:22:41,065 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:22:43,204 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:22:47,280 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有7条消息。
+2026-08-16 17:22:47,280 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定
+
+当前未提供任何检索到的参考上下文（参考资料为空），因此无法基于事实片段对“公路养护施工 现场特征 违法行为”进行确证分析。为避免臆断，现返回无法确定。
+
+依据要点：无（缺少可供引用的参考资料 #N）
+
+建议/下一步：
+1. 补充采集现场证据：拍摄养护施工区域的整体环境照片，包括施工标志、围挡、警示灯、作业区布置及周边交通状况，并记录时间、GPS坐标、拍摄方向。
+2. 调取或记录施工审批与组织文件：如公路养护施工许可、交通组织方案、安全设施设置台账，确认施工范围、时段和作业方式是否与其一致。
+3. 联系相应公路管理机构或交通运输综合执法部门，提供上述材料，由其进行人工复核和法律定性。
+
+置信度（基于检索证据）：低  
+关键因素：参考上下文为空，无任何可核验的事实片段；缺乏时间、地点、施工主体、作业状态及违法行为表现等关键信息。
+2026-08-16 17:22:55,455 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:22:55,456 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路养护'}
+2026-08-16 17:23:01,240 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:23:03,770 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有9条消息。
+2026-08-16 17:23:03,771 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定
+
+依据要点：无（未提供任何检索到的参考上下文，无法确证“道路养护”相关事实）
+
+建议/下一步：
+1. 补充现场照片或视频，需包含拍摄时间、地点、道路状况及养护作业范围。
+2. 调取道路养护记录（如养护单位、作业时间、审批文件）以核对事实。
+3. 联系属地公路管理或交通执法部门，核实养护责任主体及作业流程。
+
+置信度（基于检索证据）：低
+关键因素：检索上下文为空，无任何证据片段可支撑判断。如需明确结论，须先提供可核验的参考资料，并由人工/执法部门复核。
+2026-08-16 17:23:11,652 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 17:23:11,653 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_e44e14cbed', 'question': '请判断图中行为是否属于道路养护行为，并说明图中可观测到的具体特征（如施工警示标志、围挡、施工机械、人员着装、作业区域等）。', 'context': '知识库检索结果：当前知识库未检索到"道路养护"判定标准及相似历史案例，判定需重点核查以下可观测要素：1）是否设置施工警示标志（施工标志、警示灯、围挡范围）；2）是否存在施工机械、作业车辆与人员着装标识；3）是否公示道路施工许可证或许可编号；4）作业区域与占用范围、是否影响通行。以上要素均为区分"经批准的道路养护施工"与"擅自占用公路"行为的关键观测项，需逐项核验后由人工/执法部门复核定性。'}
+2026-08-16 17:23:11,653 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 17:23:11,882 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有11条消息。
+2026-08-16 17:23:11,882 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 未找到对应图片，请确认图片ID是否正确。
+2026-08-16 17:23:14,126 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 17:23:14,126 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询图片ID为img_e44e14cbed的案件记录，包括违法类型、发生地点、发生时间、所属支队、审核结果等信息'}
+2026-08-16 17:23:16,129 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 17:23:17,652 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有13条消息。
+2026-08-16 17:23:17,652 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT 工单编号, 违法类型, 发生地点, 发生时间, 所属支队, is_committed AS 审核结果, 图片路径 FROM results WHERE 图片路径 LIKE '%img_e44e14cbed%' LIMIT 100;
+查询结果：无匹配记录
+2026-08-16 17:23:19,915 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 17:23:19,916 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '在wupin_tanwei和sixiang_weifa历史记录表中查询图片ID为img_e44e14cbed的相关记录，包括违法类型、发生地点、发生时间、处理状态'}
+2026-08-16 17:23:22,700 - agent - WARNING - sql_service.py:124 - [sql_query]SQL执行失败，尝试修正重试：no such table: sixiang_weifa
+2026-08-16 17:23:32,472 - agent - ERROR - sql_service.py:129 - [sql_query]SQL修正后仍失败：no such table: sixiang_weifa
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 122, in query
+    rows, columns = self._execute(sql)
+                    ^^^^^^^^^^^^^^^^^^
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 106, in _execute
+    cur = conn.execute(sql)
+          ^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: sixiang_weifa
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 127, in query
+    rows, columns = self._execute(sql)
+                    ^^^^^^^^^^^^^^^^^^
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 106, in _execute
+    cur = conn.execute(sql)
+          ^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: sixiang_weifa
+2026-08-16 17:23:32,473 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 17:23:32,848 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有15条消息。
+2026-08-16 17:23:32,849 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询失败：no such table: sixiang_weifa
+2026-08-16 17:23:34,658 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 17:23:34,659 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '在wupin_tanwei表中查询图片ID为img_e44e14cbed的相关记录，包括违法类型、发生地点、发生时间、处理状态'}
+2026-08-16 17:23:36,554 - agent - WARNING - sql_service.py:124 - [sql_query]SQL执行失败，尝试修正重试：no such table: wupin_tanwei
+2026-08-16 17:23:39,831 - agent - ERROR - sql_service.py:129 - [sql_query]SQL修正后仍失败：no such table: wupin_tanwei
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 122, in query
+    rows, columns = self._execute(sql)
+                    ^^^^^^^^^^^^^^^^^^
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 106, in _execute
+    cur = conn.execute(sql)
+          ^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: wupin_tanwei
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 127, in query
+    rows, columns = self._execute(sql)
+                    ^^^^^^^^^^^^^^^^^^
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 106, in _execute
+    cur = conn.execute(sql)
+          ^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: wupin_tanwei
+2026-08-16 17:23:39,833 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 17:23:40,190 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有17条消息。
+2026-08-16 17:23:40,190 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询失败：no such table: wupin_tanwei
+2026-08-16 17:29:18,437 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护 判定标准」(doc_type=standard)返回 5 条
+2026-08-16 17:34:49,708 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 17:34:49,708 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 看下这张图片有没有道路养护行为
+【上传图片：图片ID img_b684a565ae】
+2026-08-16 17:34:53,343 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:34:53,344 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路养护行为 判定标准 认定依据', 'doc_type': 'standard'}
+2026-08-16 17:34:53,346 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:34:53,347 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路养护 相似历史案例', 'doc_type': 'case'}
+2026-08-16 17:34:54,073 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护行为 判定标准 认定依据」(doc_type=standard)返回 5 条
+2026-08-16 17:34:59,383 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:35:23,379 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-16 17:35:23,386 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 17:35:27,049 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:35:30,366 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 17:35:30,366 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 无法确定。
+
+依据要点：  
+- 证据：参考资料为空 — 未提供任何检索到的参考上下文，无法确认“道路养护”相关的相似历史案例事实片段。  
+- 缺失项：缺少案例事由、时间地点、养护责任主体、损害后果、既有判例或行政处罚记录等关键数据。
+
+建议/下一步：  
+1. 补充检索关键词，如“道路养护 积水 责任 判例”或“公路养护 事故 赔偿 案例”，重新获取带来源编号的参考片段。  
+2. 提供案件具体要素（事发路段、病害类型、养护记录、现场照片时间戳），以便匹配相似案例。  
+3. 如涉及责任认定或法律适用，需人工/执法部门复核。
+
+置信度（基于检索证据）：低 — 因参考上下文为空，无任何可确证事实支撑结论。
+2026-08-16 17:35:34,884 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 17:35:34,884 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_b684a565ae', 'question': '这张图片中是否存在道路养护行为？请结合判定标准逐项核验：1.主体合法性（是否有养护单位标识、车辆）；2.目的特定性（是否保养/修复/应急恢复而非新建改扩建）；3.客体特定性（作业对象是否为公路本体或直接附属设施）；4.程序与外观规范性（是否设置作业区、警示标志、人员防护装备）。', 'context': '判定道路养护行为须同时满足"主体—目的—客体—程序"四个核心条件，任一缺项即不构成合法道路养护行为。1）主体合法性：实施主体须为公路管理机构、公路经营企业或经其招标/委托并具资质的养护单位；未经许可的占道施工或私自开挖不属于养护。2）目的特定性：直接目的是保养、修复或应急恢复公路及其附属设施；不含新建、改扩建或商业用途工程。3）客体特定性：作业对象必须为公路本体（路基、路面、桥梁、隧道）或直接附属设施（护栏、标志标线、排水、绿化、服务设施等）。4）程序与外观规范性：作业需按《公路养护安全作业规程》（JTG H30）等要求设置作业区、警示标志、作业人员佩戴防护装备并配套警示车辆。参考示例：公路部门铣刨并重铺路面属养护；扩建车道属工程建设；自来水公司开挖更换管道属涉路施工；养护单位未设警示标识修补护栏属违规作业。'}
+2026-08-16 17:35:45,663 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 17:36:01,154 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有6条消息。
+2026-08-16 17:36:01,155 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | [{'text': '### 识别结论\n这张图片中存在**疑似道路养护行为**，但需结合更多证据进一步确认。置信度为**中等**。\n\n---\n\n### 判断依据与逐项核验\n\n#### 1. 主体合法性\n- **观察结果**：画面右侧可见多辆黄色工程车辆（疑似道路养护专用车辆），车身有反光标识，但未见明确的养护单位名称或标识。\n- **判断**：从外观上看，这些车辆符合公路养护作业车辆的特征，但无法直接确认其是否为合法授权的养护单位。需核实车辆所属单位及资质。\n- **参考判定标准**：主体合法性要求实施主体为公路管理机构、公路经营企业或经其委托并具资质的养护单位。当前图像未提供足够信息验证此条件。\n\n#### 2. 目的特定性\n- **观察结果**：画面右侧车道被划分为施工区域，设有交通锥和警示标志，表明正在进行某种作业。左侧车道仍有正常行驶的车辆，包括卡车和轿车。\n- **判断**：从现场布局看，作业区域明显用于公路养护，而非新建或改扩建工程。推测目的可能是保养、修复或应急恢复公路及其附属设施。\n- **参考判定标准**：目的必须是保养、修复或应急恢复公路及其附属设施。当前图像支持这一推测，但缺乏明确的文字标识或公告说明具体作业内容。\n\n#### 3. 客体特定性\n- **观察结果**：施工区域位于高速公路右侧车道，靠近护栏和绿化带。施工区域内未见明显对路基、路面、桥梁、隧道等本体结构的直接作业痕迹，但可能涉及附属设施（如护栏、标志标线）的维护。\n- **判断**：作业对象可能是公路的附属设施（如护栏、标志标线），但无法明确判断是否涉及公路本体结构。需进一步确认作业具体内容。\n- **参考判定标准**：作业对象必须为公路本体或直接附属设施。当前图像显示作业区域位于公路一侧，但未明确作业对象的具体范围。\n\n#### 4. 程序与外观规范性\n- **观察结果**：\n  - 施工区域已设置交通锥和警示标志，符合《公路养护安全作业规程》的基本要求。\n  - 工程车辆车身有反光标识，符合警示车辆的要求。\n  - 未见明显作业人员佩戴防护装备，但可能因距离较远或角度问题未能清晰观察到。\n- **判断**：整体程序与外观基本符合规范要求，但作业人员防护装备的细节未在图像中清晰体现，需进一步核实。\n- **参考判定标准**：作业需按《公路养护安全作业规程》设置作业区、警示标志、作业人员佩戴防护装备并配套警示车辆。当前图像显示部分符合要求，但人员防护装备细节不足。\n\n---\n\n### 综合分析\n- **结论**：根据图像分析，该场景符合道路养护行为的初步特征，但存在以下不确定因素：\n  1. 主体合法性需进一步核实车辆所属单位及资质。\n  2. 作业对象的具体范围（公路本体或附属设施）需明确。\n  3. 作业人员防护装备的细节需进一步确认。\n- **建议补证措施**：\n  1. 查阅相关养护单位的公告或施工许可文件，确认主体合法性。\n  2. 获取施工区域的详细作业计划，明确作业对象。\n  3. 调取更近距离的监控画面或现场照片，核实作业人员防护装备情况。\n\n---\n\n### 法律定性提示\n若需对违法行为进行定性，需人工/执法部门复核上述缺失项，并结合现场实际情况综合判断。当前图像仅提供初步线索，不能作为法律定性的唯一依据。'}]
+2026-08-16 17:39:03,436 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-16 17:39:03,436 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 查找一下有没有相关的历史案例
+【上传图片：图片ID img_81a92db5fd】
+2026-08-16 17:39:14,375 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:39:14,375 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路养护 施工 违法行为 判定标准', 'doc_type': 'standard'}
+2026-08-16 17:39:14,376 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:39:14,376 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '道路违法行为 历史案例', 'doc_type': 'case'}
+2026-08-16 17:39:14,554 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路违法行为 历史案例」(doc_type=case)返回 5 条
+2026-08-16 17:39:27,456 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:39:44,406 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-16 17:39:44,409 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-16 17:39:48,006 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:39:56,851 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有4条消息。
+2026-08-16 17:39:56,851 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 简短结论：根据历史案例记录，案例编号916于2026-08-03在S304早鲍路K10+020铁路桥西，因在公路及公路用地范围内摆摊设点，造成公路路面损坏、污染或影响公路畅通，最终被审核认定为“违法”。
+
+依据要点：
+- 证据：参考资料1（违法案例_004.md） — “违法类型：在公路上及公路用地范围内摆摊设点；违法描述：造成公路路面损坏、污染或者影响公路畅通；发生地点：S304早鲍路K10+020铁路桥西；发生时间：2026-08-03 08:51:18；最终审核结果：违法” 确证该历史案例的违法事实与认定结果。
+- 证据：参考资料1（违法案例_004.md） — “AI识别结果：模型输出{"result": "yes"...}；模型判断：yes；检测框：[[975, 386, 1164, 492]]” 确证AI识别结果为支持违法判断，并给出目标检测框位置。
+- 证据：参考资料1（违法案例_004.md） — “所属支队：十支队-平谷执法队；图片地址：http://10.212.160.162:5000/preview/baitan/camera_11000000001313411393_20260803_085118.jpg” 确证管辖单位及对应图片证据链接。
+
+建议/下一步：
+1. 现场取证时可参照案例中的检测框坐标（[975, 386, 1164, 492]）核验摆摊设点目标位置，并保存原始图片及时间戳。
+2. 建议补充现场全景视频或多角度照片，完整记录“造成公路路面损坏、污染或者影响公路畅通”的客观状态。
+3. 如需处罚裁量或案件详情，建议联系十支队-平谷执法队调取完整案卷，由执法部门人工复核。
+
+置信度（基于检索证据）：高  
+影响关键因素：参考资料1为结构化历史案例记录，时间、地点、违法类型、AI识别结果及最终审核结论齐全，证据直接充分；但图片内容本身未在文本中直观呈现，需通过链接进一步核验。
+2026-08-16 17:40:02,906 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-16 17:40:02,906 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_81a92db5fd', 'question': '请识别图片中的场景与行为内容，判断其是否属于道路违法行为，属于哪一类违法行为（如摆摊设点、道路养护施工、擅自占用公路等）？请说明识别依据。', 'context': '知识库检索资料摘要：1）判定标准检索未返回具体条款，提示需参考《公路法》《道路交通安全法》及地方性养护施工安全规范；2）历史案例：案例编号916，2026-08-03在S304早鲍路K10+020铁路桥西发生"在公路上及公路用地范围内摆摊设点，造成公路路面损坏、污染或影响公路畅通"的违法行为，最终审核认定违法，AI识别模型输出yes，检测框[975,386,1164,492]，所属十支队-平谷执法队。'}
+2026-08-16 17:40:20,037 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-16 17:40:33,269 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有6条消息。
+2026-08-16 17:40:33,270 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | [{'text': '### 识别结论\n**行为类型：摆摊设点/擅自占用公路**\n**置信度：中高**\n\n---\n\n### 判断依据\n\n1. **图片可见要素分析**：\n   - **道路中央及路边物品**：在道路左侧边缘（靠近护栏处）堆放了多袋白色和蓝色的物品，疑似建筑材料或垃圾。这些物品占据了部分路面空间，可能影响车辆通行。\n   - **检测框位置**：红色检测框明确标示出这些物品的位置，表明其为关注的重点对象。\n   - **时间线索**：监控时间为2026年7月25日09:58:46，属于白天正常时段，此类物品堆放不符合道路整洁和畅通的要求。\n\n2. **历史案例对比**：\n   - 图片场景与参考案例（编号916）高度相似，均发生在公路一侧堆放物品，且物品直接占用路面空间，影响交通秩序和安全。\n   - 参考案例中明确指出“在公路上及公路用地范围内摆摊设点，造成公路路面损坏、污染或影响公路畅通”的违法行为，AI模型判定为违法（输出yes），检测框位置与本图物品分布一致。\n\n3. **法律法规关联**：\n   - 根据《公路法》第46条，禁止任何单位和个人在公路上及公路用地范围内摆摊设点、堆放物品、倾倒垃圾等行为。\n   - 根据《道路交通安全法》第31条，未经许可不得在道路上设置障碍物或堆放物品。\n   - 本图中堆放的物品明显违反上述规定，属于擅自占用公路的行为。\n\n4. **其他辅助信息**：\n   - 道路右侧停放有卡车和摩托车，但未对道路通行造成直接影响。\n   - 周边环境为乡村或郊区道路，无明显施工区域标识，进一步支持该行为不属于合法养护施工。\n\n---\n\n### 对应关系与标准匹配\n- **判定标准**：本图场景符合《公路法》和《道路交通安全法》中关于“擅自占用公路”的定义。\n- **参考案例**：与案例编号916高度吻合，均为在公路一侧堆放物品并占用路面空间，影响交通秩序。\n\n---\n\n### 补证建议与不确定性说明\n1. **缺失信息**：\n   - 无法确认堆放物品的具体性质（如是否为建筑废料、生活垃圾或其他合法物品）。\n   - 无法确定物品堆放的时间长度（是否为临时行为或长期占用）。\n\n2. **补证建议**：\n   - 调查物品来源及用途，确认是否为合法堆放。\n   - 查看是否有相关部门许可或施工公告，排除合法施工的可能性。\n\n3. **需人工/执法部门复核**：\n   - 虽然AI模型已初步判定为违法行为，但最终定性仍需执法人员现场核实物品性质及堆放背景，以确保法律适用的准确性。\n\n---\n\n### 总结\n图片中堆放物品的行为符合“摆摊设点”或“擅自占用公路”的违法特征，置信度较高。建议执法人员尽快到场核实物品性质及堆放背景，并根据实际情况依法处理。'}]
+2026-08-16 17:40:39,163 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-16 17:40:39,164 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'doc_type': 'case', 'query': '公路上及公路用地范围内堆放物品 擅自占用公路 摆摊设点 影响公路畅通'}
+2026-08-16 17:40:39,166 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-16 17:40:39,166 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询案件数据库中违法类型涉及"堆放物品""擅自占用公路""摆摊设点"或"影响公路畅通"的案件数量，并按违法类型分组统计，同时列出部分案件的案例编号、发生地点、发生时间、所属支队'}
+2026-08-16 17:40:39,441 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「公路上及公路用地范围内堆放物品 擅自占用公路 摆摊设点 影响公路畅通」(doc_type=case)返回 5 条
+2026-08-16 17:40:56,514 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-16 17:40:57,526 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-16 17:46:01,055 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护行为的判定标准是什么」(doc_type=全部)返回 5 条
+2026-08-16 17:46:04,270 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护行为的判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:04,410 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「如何判断一个施工作业是否属于合法的道路养护行为？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:04,607 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护施工需要同时满足哪些条件才算合法？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:04,768 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「什么情况下占用公路属于违法而不属于道路养护？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:04,925 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护作业的主体合法性和审批要求是什么？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:05,085 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的合法判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:05,240 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「公路用地范围内的物品摆放如何判定是否合法？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:05,373 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「请找出擅自占用、挖掘公路的典型案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:05,512 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「与遮挡公路附属设施相关的历史案例有哪些？」(doc_type=case)返回 5 条
+2026-08-16 17:46:05,669 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内摆摊设点的案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:05,817 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路范围内擅自移动井盖的案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:05,951 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路用地范围内设置公路标志以外的其他标志的案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:06,102 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的案例有哪些特征？」(doc_type=case)返回 5 条
+2026-08-16 17:46:06,246 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在X017康草路K0+150铁路桥附近的违法案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:06,404 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在G111京漠线K77+696分水岭的违法案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:06,538 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护时未设置施工警示标志，属于什么行为？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:06,675 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「擅自占用、挖掘公路与道路养护施工如何区分？」(doc_type=全部)返回 5 条
+2026-08-16 17:46:06,801 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「水泥罐车在公路上作业是否属于道路养护行为？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:06,957 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「汛期公路抢险清障行为的认定标准」(doc_type=standard)返回 5 条
+2026-08-16 17:46:07,127 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在路灯杆上悬挂条幅、广告等物品的违法行为案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,264 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护行为的判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:34,300 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「如何判断一个施工作业是否属于合法的道路养护行为？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:34,350 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护施工需要同时满足哪些条件才算合法？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:34,409 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「什么情况下占用公路属于违法而不属于道路养护？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:34,464 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护作业的主体合法性和审批要求是什么？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:34,525 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的合法判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:34,581 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「公路用地范围内的物品摆放如何判定是否合法？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:34,641 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「请找出擅自占用、挖掘公路的典型案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,679 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「与遮挡公路附属设施相关的历史案例有哪些？」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,732 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内摆摊设点的案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,767 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路范围内擅自移动井盖的案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,803 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路用地范围内设置公路标志以外的其他标志的案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,857 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的案例有哪些特征？」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,890 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在X017康草路K0+150铁路桥附近的违法案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,925 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在G111京漠线K77+696分水岭的违法案例」(doc_type=case)返回 5 条
+2026-08-16 17:46:34,982 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护时未设置施工警示标志，属于什么行为？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:35,017 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「擅自占用、挖掘公路与道路养护施工如何区分？」(doc_type=全部)返回 5 条
+2026-08-16 17:46:35,053 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「水泥罐车在公路上作业是否属于道路养护行为？」(doc_type=standard)返回 5 条
+2026-08-16 17:46:35,103 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「汛期公路抢险清障行为的认定标准」(doc_type=standard)返回 5 条
+2026-08-16 17:46:35,151 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在路灯杆上悬挂条幅、广告等物品的违法行为案例」(doc_type=case)返回 5 条

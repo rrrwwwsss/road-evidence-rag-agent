@@ -1,0 +1,10 @@
+collection_name: agent
+persist_directory: chroma_db
+k: 5
+data_path: data/违法案例库
+md5_hex_store: md5.text
+allow_knowledge_file_type: ["txt", "pdf","md"]
+
+chunk_size: 2000
+chunk_overlap: 500
+separators: ["========================"]

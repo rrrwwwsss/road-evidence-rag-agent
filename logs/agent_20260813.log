@@ -1,0 +1,10 @@
+2026-08-13 20:22:56,566 - agent - INFO - vector_store.py:99 - [加载知识库]F:\AI_program\other_project\非现场取证线索库智能查询系统\data/违法案例库\违法案例_001.md 内容加载成功
+2026-08-13 20:25:09,616 - agent - INFO - vector_store.py:99 - [加载知识库]F:\AI_program\other_project\非现场取证线索库智能查询系统\data/违法案例库\违法案例_002.md 内容加载成功
+2026-08-13 20:27:05,147 - agent - INFO - vector_store.py:99 - [加载知识库]F:\AI_program\other_project\非现场取证线索库智能查询系统\data/违法案例库\违法案例_003.md 内容加载成功
+2026-08-13 20:27:46,343 - agent - INFO - vector_store.py:99 - [加载知识库]F:\AI_program\other_project\非现场取证线索库智能查询系统\data/违法案例库\违法案例_004.md 内容加载成功
+2026-08-13 21:47:39,890 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-13 21:47:39,890 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 给我生成我的使用报告
+2026-08-13 21:49:24,442 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-13 21:49:24,442 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 给我生成我的使用报告
+2026-08-13 21:55:15,925 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-13 21:55:15,926 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 风险等级评估：根据 AI 输出与现场要素，把某一案件评为高/中/低风险并说明理由。
