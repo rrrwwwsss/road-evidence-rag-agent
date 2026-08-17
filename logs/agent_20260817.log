@@ -1,0 +1,14 @@
+2026-08-17 10:08:41,558 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护行为的判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-17 10:08:41,793 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「如何判断一个施工作业是否属于合法的道路养护行为？」(doc_type=standard)返回 5 条
+2026-08-17 10:08:41,967 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护施工需要同时满足哪些条件才算合法？」(doc_type=standard)返回 5 条
+2026-08-17 10:08:42,158 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「什么情况下占用公路属于违法而不属于道路养护？」(doc_type=standard)返回 5 条
+2026-08-17 10:08:42,323 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「道路养护作业的主体合法性和审批要求是什么？」(doc_type=standard)返回 5 条
+2026-08-17 10:08:42,482 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的合法判定标准是什么？」(doc_type=standard)返回 5 条
+2026-08-17 10:08:42,628 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「公路用地范围内的物品摆放如何判定是否合法？」(doc_type=standard)返回 5 条
+2026-08-17 10:08:42,806 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「请找出擅自占用、挖掘公路的典型案例」(doc_type=case)返回 5 条
+2026-08-17 10:08:42,970 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「与遮挡公路附属设施相关的历史案例有哪些？」(doc_type=case)返回 5 条
+2026-08-17 10:08:43,119 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内摆摊设点的案例」(doc_type=case)返回 5 条
+2026-08-17 10:08:43,257 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路范围内擅自移动井盖的案例」(doc_type=case)返回 5 条
+2026-08-17 10:08:44,934 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路用地范围内设置公路标志以外的其他标志的案例」(doc_type=case)返回 5 条
+2026-08-17 10:08:45,065 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的案例有哪些特征？」(doc_type=case)返回 5 条
+2026-08-17 10:08:45,229 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在X017康草路K0+150铁路桥附近的违法案例」(doc_type=case)返回 5 条
