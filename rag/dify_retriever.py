@@ -6,7 +6,7 @@ Dify 知识库检索客户端：调用 Dify 的 Dataset 检索 API（POST /v1/da
 """
 import os
 from dotenv import load_dotenv
-load_dotenv()  # 单独运行本模块时也能读到 .env 中的 DIFY_API_KEY
+load_dotenv()  #  单独运行本模块时也能读到 .env 中的 DIFY_API_KEY
 import requests
 from langchain_core.documents import Document
 from utils.config_handler import dify_conf
