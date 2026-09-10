@@ -6,6 +6,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from utils.path_tool import get_abs_path
 from utils.file_handler import pdf_loader, txt_loader, md_loader, listdir_with_allowed_type, get_file_md5_hex
 from utils.logger_handler import logger
+from functools import lru_cache
 import os
 
 
@@ -76,7 +77,6 @@ class VectorStoreService:
             if check_md5_hex(md5_hex):
                 logger.info(f"[加载知识库]{path}内容已经存在知识库内，跳过")
                 continue
-
             try:
                 documents: list[Document] = get_file_documents(path)
 
@@ -103,8 +103,14 @@ class VectorStoreService:
                 continue
 
 
+@lru_cache(maxsize=1)
+def get_vector_store_service() -> VectorStoreService:
+    """进程级复用 Chroma 客户端，避免热重载/多会话重复释放 Rust bindings。"""
+    return VectorStoreService()
+
+
 if __name__ == '__main__':
-    vs = VectorStoreService()
+    vs = get_vector_store_service()
 
     vs.load_document()
 

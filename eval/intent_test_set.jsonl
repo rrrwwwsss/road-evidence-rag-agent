@@ -1,0 +1,13 @@
+{"id":"i01","question":"擅自占用公路一共有多少条？","expected_intent":"case_query"}
+{"id":"i02","question":"2026年7月23日哪个支队案件最多？","expected_intent":"case_query"}
+{"id":"i03","question":"道路养护行为的判定标准是什么？","expected_intent":"knowledge_query"}
+{"id":"i04","question":"与摆摊设点相关的历史案例有哪些？","expected_intent":"knowledge_query"}
+{"id":"i05","question":"图中是否属于道路养护？【上传图片：图片ID img_eval001】","expected_intent":"image_assessment"}
+{"id":"i06","question":"请识别这张照片【上传图片：图片ID img_eval002】","expected_intent":"image_assessment"}
+{"id":"i07","question":"统计2026年5月密云执法队案件并生成执法报告","expected_intent":"report_generation"}
+{"id":"i08","question":"你好，你能做什么？","expected_intent":"general_chat"}
+{"id":"i09","question":"查找有没有类似的历史案例【上传图片：图片ID img_eval003】","expected_intent":"image_case_search"}
+{"id":"i10","question":"结合相似案例判断图中是否违法【上传图片：图片ID img_eval004】","expected_intent":"image_assessment"}
+{"id":"i11","question":"看看这张图片有没有违法案例【上传图片：图片ID img_eval005】","expected_intent":"image_case_search"}
+{"id":"i12","question":"看看图中有没有违法【上传图片：图片ID img_eval006】","expected_intent":"image_assessment"}
+{"id":"i13","question":"查找这张图片的历史案例，并根据案例判断这个图片有没有违法行为【上传图片：图片ID img_eval007】","expected_intent":"image_assessment"}

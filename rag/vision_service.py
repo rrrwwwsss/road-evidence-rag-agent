@@ -1,12 +1,21 @@
 """
 视觉分析服务：调用 Qwen-VL 视觉大模型识别图片中的违法行为，可结合 RAG 判定标准。
 """
+from contextlib import contextmanager
+from contextvars import ContextVar
+from collections.abc import Iterator, Mapping
+
 from langchain_core.messages import HumanMessage
 from model.factory import vision_model
 from utils.logger_handler import logger
+from utils.message_content import extract_text
 
 # 用户上传图片缓存：img_id -> data URI（base64）
 _uploaded_images: dict[str, str] = {}
+_runtime_uploaded_images: ContextVar[Mapping[str, str] | None] = ContextVar(
+    "runtime_uploaded_images",
+    default=None,
+)
 
 
 def register_uploaded_image(img_id: str, data_uri: str) -> None:
@@ -14,9 +23,22 @@ def register_uploaded_image(img_id: str, data_uri: str) -> None:
     _uploaded_images[img_id] = data_uri
 
 
+@contextmanager
+def use_uploaded_images(images: Mapping[str, str] | None) -> Iterator[None]:
+    """在当前 LangGraph 调用上下文中绑定本会话图片，不写入全局状态。"""
+    token = _runtime_uploaded_images.set(images or {})
+    try:
+        yield
+    finally:
+        _runtime_uploaded_images.reset(token)
+
+
 def resolve_image(image: str) -> str:
     """把图片ID解析为data URI；URL或data URI则原样返回。"""
     if image.startswith("img_"):
+        runtime_images = _runtime_uploaded_images.get()
+        if runtime_images and image in runtime_images:
+            return runtime_images[image]
         return _uploaded_images.get(image, "")
     return image
 
@@ -32,21 +54,48 @@ VISION_PROMPT_TEXT = """你是道路/现场取证图像分析专家。请基于�
 4. 不确定或图片信息不足时，明确说明缺失项与补证建议，不得臆断；
 5. 涉及法律定性时提示"需人工/执法部门复核"。"""
 
+RETRIEVAL_PROMPT_TEXT = """你是道路/现场取证图片特征提取助手。你的输出将用于检索相似历史案例，不负责判断当前图片是否违法。
+
+用户请求：{question}
+
+【当前 Skill 执行要求】
+{instructions}
+
+请只输出图片中能够直接观察到的客观特征：
+1. 道路环境、道路类型和大致位置特征；
+2. 车辆、人员、机械、物品、标志和设施；
+3. 可见行为、空间关系、颜色、形状及文字标识；
+4. 可用于案例检索的关键词；
+5. 图片模糊或不可见的信息。
+
+最后必须单独输出一行“检索关键词：关键词1、关键词2……”，该行不超过120个中文字符，优先保留行为、物体、道路环境和空间关系。
+
+禁止输出“违法”“合法”“未确认违法”等法律或审核结论，不得推测许可、审批或人员身份。"""
+
 
 class VisionService:
     def __init__(self):
         self.model = vision_model
 
-    def analyze(self, image: str, question: str, context: str = "") -> str:
+    def analyze(self, image: str, question: str, context: str = "",
+                mode: str = "assessment", instructions: str = "") -> str:
         image_ref = resolve_image(image)
         if not image_ref:
             return f"未找到图片 {image}：请确认已通过聊天输入框真实上传图片（不要手动输入图片ID），上传后重新提问。"
 
-        parts = []
-        if context and context.strip():
-            parts.append(f"【RAG判定标准与参考案例】\n{context}")
-        parts.append(f"【用户问题】\n{question}")
-        prompt = VISION_PROMPT_TEXT.format(prompt_body="\n\n".join(parts))
+        if mode == "retrieval":
+            prompt = RETRIEVAL_PROMPT_TEXT.format(
+                question=question,
+                instructions=instructions,
+            )
+        else:
+            parts = []
+            if instructions.strip():
+                parts.append(f"【当前 Skill 执行要求】\n{instructions}")
+            if context and context.strip():
+                parts.append(f"【RAG判定标准与参考案例】\n{context}")
+            parts.append(f"【用户问题】\n{question}")
+            prompt = VISION_PROMPT_TEXT.format(prompt_body="\n\n".join(parts))
 
         try:
             response = self.model.invoke([
@@ -55,8 +104,7 @@ class VisionService:
                     {"text": prompt},
                 ]),
             ])
-            content = response.content
-            return content if isinstance(content, str) else str(content)
+            return extract_text(response.content)
         except Exception as e:
             logger.error(f"[vision_analyze]视觉模型调用失败：{e}", exc_info=True)
             return f"视觉模型调用失败：{e}"

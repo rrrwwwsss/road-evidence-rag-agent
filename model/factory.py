@@ -7,7 +7,10 @@ from langchain_community.chat_models.tongyi import BaseChatModel
 from langchain_community.embeddings import DashScopeEmbeddings
 from langchain_community.chat_models.tongyi import ChatTongyi
 from utils.config_handler import rag_conf
-from langchain_openai import ChatOpenAI
+try:
+    from langchain_openai import ChatOpenAI
+except ImportError:  # 兼容尚未安装独立 langchain-openai 包的旧环境
+    from langchain_community.chat_models import ChatOpenAI
 
 
 class BaseModelFactory(ABC):

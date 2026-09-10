@@ -1,0 +1,363 @@
+2026-09-01 10:25:50,190 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:25:50,191 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:25:50,193 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:25:50,193 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 10:25:50,193 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:25:50,193 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:25:50,194 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:25:50,194 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:25:50,196 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 10:26:12,053 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:26:12,054 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:26:12,055 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:26:12,055 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 10:26:12,055 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:26:12,055 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:26:12,057 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:26:12,057 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:26:12,059 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 10:33:24,820 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:33:24,821 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:33:24,821 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:33:24,822 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 10:33:24,822 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:33:24,822 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:33:24,822 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:33:24,822 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:33:24,826 - agent - ERROR - rag_service.py:60 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 56, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 10:33:24,831 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 10:34:15,312 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:34:15,312 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:34:15,313 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:34:15,313 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 10:34:15,313 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:34:15,313 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:34:15,314 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:34:15,314 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:34:15,315 - agent - ERROR - rag_service.py:60 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 56, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 10:34:15,319 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 10:38:37,401 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:38:41,507 - agent - ERROR - dify_retriever.py:99 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Max retries exceeded with url: /v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3272): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 500, in request
+    self.endheaders()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1093, in _send_output
+    self.send(msg)
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1037, in send
+    self.connect()
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='localhost', port=3272): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3272): Max retries exceeded with url: /v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3272): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 84, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3272): Max retries exceeded with url: /v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3272): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+2026-09-01 10:38:41,515 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-09-01 10:40:31,185 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:40:32,758 - agent - INFO - dify_retriever.py:118 - [DifyRetriever]查询「判断一下这个行为是否属于悬挂物 【上传图片：图片ID img_03c67b467e】」(doc_type=全部)返回 5 条
+2026-09-01 10:47:59,378 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:47:59,378 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:47:59,378 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:47:59,379 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 10:47:59,379 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:47:59,379 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:47:59,379 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:47:59,380 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:47:59,381 - agent - ERROR - rag_service.py:60 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 56, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 10:47:59,385 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 10:49:01,990 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:49:01,990 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:49:01,990 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:49:01,991 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 10:49:01,991 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:49:01,991 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:49:01,992 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:49:01,992 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:49:01,993 - agent - ERROR - rag_service.py:60 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 56, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 10:49:01,997 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 10:52:31,161 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:52:31,620 - agent - INFO - dify_retriever.py:118 - [DifyRetriever]查询「这个图片有非法悬挂物行为吗 【上传图片：图片ID img_3ece3caa0c】」(doc_type=全部)返回 5 条
+2026-09-01 10:56:10,538 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:56:10,538 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:56:10,539 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 10:56:10,539 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 10:56:10,539 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 10:56:10,540 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:56:10,540 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 10:56:10,540 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:56:10,540 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 10:56:10,542 - agent - ERROR - rag_service.py:60 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 56, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 10:56:10,545 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 11:00:45,868 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 11:00:46,072 - agent - INFO - dify_retriever.py:118 - [DifyRetriever]查询「这个图片有非法悬挂物行为吗 【上传图片：图片ID img_be5185ad2b】」(doc_type=全部)返回 5 条
+2026-09-01 16:55:21,088 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 16:55:51,117 - agent - ERROR - dify_retriever.py:99 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 84, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-09-01 16:55:51,125 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-09-01 17:01:18,957 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 17:01:18,959 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 17:01:18,960 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 17:01:18,961 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 17:01:18,961 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 17:01:18,961 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 17:01:18,962 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 17:01:18,962 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 17:01:18,963 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 17:01:18,965 - agent - ERROR - rag_service.py:60 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 56, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 17:01:18,972 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 17:04:39,188 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 17:04:39,188 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 17:04:39,188 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 17:04:39,188 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 17:04:39,189 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 17:04:39,189 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 17:04:39,189 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 17:04:39,190 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 17:04:39,190 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 17:04:39,191 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 17:04:39,195 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-01 17:04:39,195 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-01 17:04:39,195 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-01 17:04:39,196 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-01 17:04:39,196 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-01 17:04:39,197 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 17:04:50,842 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「道路养护施工判定标准」(doc_type=全部)返回 5 条
+2026-09-01 17:05:26,807 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 17:05:26,807 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 17:05:26,808 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-01 17:05:26,808 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-01 17:05:26,808 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-01 17:05:26,808 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 17:05:26,809 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 17:05:26,809 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 17:05:26,809 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-01 17:05:26,810 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-01 17:05:26,813 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-01 17:05:26,814 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-01 17:05:26,814 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-01 17:05:26,814 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-01 17:05:26,814 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-01 17:05:26,816 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-01 17:10:55,635 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-01 17:10:55,877 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「这张图片有没有非法悬挂物的行为 【上传图片：图片ID img_f03c0e2b0a】」(doc_type=全部)返回 5 条

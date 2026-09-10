@@ -1,0 +1,419 @@
+2026-08-24 20:56:14,892 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-24 20:56:14,893 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 你好
+2026-08-25 07:57:05,727 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-25 07:57:05,733 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 请查询一下7月23日的违法行为情况
+2026-08-25 07:57:11,629 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-25 07:57:11,629 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '请查询7月23日的违法行为情况，包括违法类型、数量、地点等统计信息'}
+2026-08-25 07:57:26,053 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-25 07:57:28,275 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有3条消息。
+2026-08-25 07:57:28,275 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT 违法类型, 发生地点, COUNT(*) as 违法数量 FROM results WHERE 发生时间 LIKE '2026-07-23%' AND is_committed = 1 GROUP BY 违法类型, 发生地点 LIMIT 100;
+查询结果共 1 条：
+1. 违法类型=在公路上及公路用地范围内摆摊设点, 发生地点=G234兴阳线K134+810柏查子, 违法数量=1
+2026-08-25 08:05:14,532 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-25 08:05:14,532 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 查询8月20号的所有案例，包括已提交和未提交
+2026-08-25 08:05:18,756 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-25 08:05:18,757 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询2026年8月20日的所有案例，包括已提交和未提交的案例'}
+2026-08-25 08:05:30,274 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-25 08:05:31,124 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有3条消息。
+2026-08-25 08:05:31,124 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT * FROM results WHERE 发生时间 LIKE '2026-08-20%' LIMIT 100
+查询结果：无匹配记录
+2026-08-25 08:05:34,893 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-25 08:05:34,894 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': "查询所有发生时间包含'08-20'的案例，即8月20日的案例"}
+2026-08-25 08:06:15,057 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-25 08:06:15,878 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有5条消息。
+2026-08-25 08:06:15,879 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT * FROM results WHERE 发生时间 LIKE '%08-20%' LIMIT 100;
+查询结果：无匹配记录
+2026-08-25 08:06:18,548 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-25 08:06:18,548 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询数据库中所有案例的日期范围，包括最早和最晚的发生时间'}
+2026-08-25 08:06:27,951 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-25 08:06:29,684 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有7条消息。
+2026-08-25 08:06:29,685 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT MIN(发生时间) AS earliest_time, MAX(发生时间) AS latest_time FROM results;
+查询结果共 1 条：
+1. earliest_time=2026-04-02 08:00:24, latest_time=2026-08-11 16:52:26
+2026-08-25 08:22:56,563 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-25 08:22:56,564 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 查询8月3号的所有案例，包括已提交和未提交
+2026-08-25 08:23:05,112 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-25 08:23:05,112 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询8月3日的所有案例，包括已提交和未提交的'}
+2026-08-25 08:23:17,474 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-25 08:27:59,200 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有3条消息。
+2026-08-25 08:27:59,201 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT * FROM results WHERE 发生时间 LIKE '2026-08-03%' LIMIT 100;
+查询结果共 19 条：
+1. id=914, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110112, 工单编号=camera_11011201071328060012_20260803_062609.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G0121京秦高速匝道K16+300京秦入六环双向匝道桥进京西（固定）, 发生时间=2026-08-03 06:26:09, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11011201071328060012_20260803_062609.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Identify Road Infrastructure**: The image shows multiple levels of highways with concrete supports and barriers. There are no visible traffic signals, signs, or other legal traffic facilities apart from the structural elements themselves.
+
+2. **Check for Suspended Items**:
+   - A white object appears to be hanging down near one of the bridge columns. It does not appear to be part of the normal infrastructure like a pipe or cable but rather seems loose or detached.
+
+3. **Exclude Ignored Elements**:
+   - The object does not match descriptions of legal traffic facilities, background objects, or normal bridge-related infrastructure.
+   - It also doesn't resemble moving targets, artificial processing traces, or decorative items.
+
+4. **Assess Potential Danger**:
+   - Given its position and appearance, this object could potentially fall onto the road below, posing a hazard.
+
+### Result:
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [950, 230, 1005, 375]
+    ]
+}
+```
+
+This bounding box corresponds to the suspicious hanging object detected near the bridge column., is_committed=0, 所属支队=十支队-通州执法队
+2. id=915, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110116, 工单编号=camera_11000000001315106846_20260803_065503.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=X002中高路K7宰相庄泵站高各庄方向, 发生时间=2026-08-03 06:55:03, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11000000001315106846_20260803_065503.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Legal Traffic Facilities**: The visible elements like the overpass, streetlights, and road markings are standard components of road infrastructure and should be disregarded.
+
+2. **Background Objects**: The surrounding greenery, including trees and bushes, does not extend into the roadway and poses no immediate danger.
+
+3. **Legal Infrastructure**: There are no visible pipes or structural elements that appear abnormal or detached from their intended positions.
+
+4. **Irrelevant Details**: No artificial processing marks, light spots, or minor obstructions are present.
+
+5. **Moving Targets**: Pedestrians and vehicles are moving along the road without any unusual activity.
+
+6. **Normal Bridge Phenomena**: The overpass appears normal with no additional decorations or items hanging from it.
+
+7. **Potential Hazards**: Upon close inspection, there are several thin lines crossing the road horizontally at various heights. These could potentially be wires or ropes that might pose a hazard to drivers, especially motorcyclists.
+
+---
+
+### Conclusion:
+
+The thin horizontal lines across the road seem out of place for typical road infrastructure and could endanger road users. They don't match descriptions of legal traffic facilities or background objects.
+
+**Result:**  
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [0, 0, 1931, 1092] // This bounding box encompasses the entire area affected by these potential hazards.
+    ]
+}
+```, is_committed=0, 所属支队=十支队-怀柔执法队
+3. id=916, TJ_NAME=造成公路路面损坏、污染或者影响公路畅通, MEASURE=C1901100, UNIT_CODE=110117, 工单编号=camera_11000000001313411393_20260803_085118.jpg, 违法类型=在公路上及公路用地范围内摆摊设点, 发生地点=S304早鲍路K10+020铁路桥西, 发生时间=2026-08-03 08:51:18, 图片路径=http://10.212.160.162:5000/preview/baitan/camera_11000000001313411393_20260803_085118.jpg, OffsiteRule_id=a3f1b9c8d4e7426fa8b1c0d9e5f3a2b4, model_output=```json
+{"result": "yes", "bounding_boxes": [[975, 386, 1164, 492]]}
+```, is_committed=1, 所属支队=十支队-平谷执法队
+4. id=917, TJ_NAME=造成公路路面损坏、污染或者影响公路畅通, MEASURE=C1901100, UNIT_CODE=110117, 工单编号=camera_11000000001313411393_20260803_094022.jpg, 违法类型=在公路上及公路用地范围内堆放物品, 发生地点=S304早鲍路K10+020铁路桥西, 发生时间=2026-08-03 09:40:22, 图片路径=http://10.212.160.162:5000/preview/wupin/camera_11000000001313411393_20260803_094022.jpg, OffsiteRule_id=a3f1b9c8d4e7426fa8b1c0d9e5f3a2b4, model_output=```json
+{"result": "yes", "bounding_boxes": [[985, 406, 1227, 485]]}
+``` 
+
+The image shows several objects that appear to be stacked near the side of the road under the bridge structure. These objects do not seem to be part of a construction site, nor do they resemble typical traffic control devices like barriers or cones. Therefore, it appears that items are indeed stacked on or within the road area., is_committed=1, 所属支队=十支队-平谷执法队
+5. id=918, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110116, 工单编号=camera_11000000001314521581_20260803_082252.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=S309滦赤路K107+260西帽山, 发生时间=2026-08-03 08:22:52, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11000000001314521581_20260803_082252.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Road Infrastructure Review**:
+   - The image shows a curved road with visible road markings, guardrails, and vegetation along both sides.
+   - There are no visible traffic lights, signs, or other legal traffic facilities directly above the road.
+
+2. **Objects Above Road**:
+   - A thin horizontal line appears across the upper part of the image, spanning horizontally above the road. This could potentially be a wire, cable, or similar object.
+   - No other obvious items like ropes, decorations, or hanging objects are present above the road.
+
+3. **Exclusion Criteria**:
+   - The thin horizontal line does not appear to be a standard traffic facility, sign, or part of normal infrastructure.
+   - It doesn't seem to belong to any visible building wall, tree branch, or legal infrastructure component.
+
+4. **Text Extraction and Analysis**:
+   - No text is visible on this potential object; therefore, further exclusion based on textual content isn’t applicable here.
+
+### Conclusion:
+The thin horizontal line above the road seems to be an illegal item that might endanger road safety. 
+
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [0, 250, 1920, 260]
+    ]
+}
+```
+
+This bounding box represents the approximate position of the horizontal line relative to a 1000x1000 pixel reference frame., is_committed=0, 所属支队=十支队-怀柔执法队
+6. id=919, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110118, 工单编号=camera_11011801071328160172_20260803_080624.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G45大广高速道路K76+390邓家湾隧道西进京（可控）, 发生时间=2026-08-03 08:06:24, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11011801071328160172_20260803_080624.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Identify Road Infrastructure**: The image shows a highway with clear lane markings, guardrails, and surrounding greenery. There are no visible traffic signals, signs, or other legal traffic facilities directly above the road.
+
+2. **Check for Suspended Items**:
+   - A yellowish object appears to hang diagonally across part of the road. This object does not resemble typical legal infrastructure like cables, wires, or traffic lights. It seems irregular and out of place compared to standard road features.
+
+3. **Examine Object Characteristics**:
+   - The object has a distinct shape resembling a net or mesh-like material. Its placement suggests it might be unintentionally caught or improperly installed rather than being a deliberate installation by authorities.
+
+4. **Text Content Check**:
+   - No discernible text is present on this object; therefore, it cannot be classified based on textual content.
+
+5. **Consider Environmental Factors**:
+   - The image quality is clear enough to identify the object without significant obstruction from weather conditions or artificial processing artifacts.
+
+### Conclusion:
+
+The object appears to be an illegal item hanging above the road, posing potential danger to traffic safety. 
+
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [700, 0, 1190, 770]
+    ]
+}
+```, is_committed=0, 所属支队=十支队-密云执法队
+7. id=920, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110117, 工单编号=camera_11000000001311215524_20260803_085321.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=S331顺平南线K33+700京平高速出口桥西, 发生时间=2026-08-03 08:53:21, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11000000001311215524_20260803_085321.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Legal Traffic Facilities**: The visible elements like traffic signs, overpass structures, and surveillance cameras are part of standard road infrastructure and should be disregarded.
+
+2. **Background Objects**: There are no objects adhering to the walls of roadside buildings or extending above the road beyond what's expected for normal infrastructure.
+
+3. **Legal Infrastructure**: The drainage pipes appear to be securely attached to the bridge structure without any abnormal suspension.
+
+4. **Irrelevant Details**: No significant light spots, shadows, or minor objects are present that could interfere with the assessment.
+
+5. **Moving Targets**: There are no pedestrians or vehicles directly relevant to this specific analysis.
+
+6. **Normal Bridge Phenomena**: The overpass has vehicles moving normally, which is expected and does not indicate any irregularities.
+
+7. **Artificial Processing Traces**: No artificial modifications or annotations are evident in the image.
+
+8. **Decorations**: No lanterns, Chinese knots, or similar decorative items are observed.
+
+9. **Potential Illegal Items**: Upon close inspection, there are some wires/cables running across the top right corner of the image near the bridge. These seem to extend horizontally and might not belong to typical road infrastructure.
+
+---
+
+### Result:
+
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [1300, 100, 1900, 300]
+    ]
+}
+```
+
+The bounding box indicates the area where potential non-standard cables or wires are located. This needs further investigation to confirm their legality and relevance to road safety., is_committed=0, 所属支队=十支队-平谷执法队
+8. id=921, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110113, 工单编号=camera_11010501071328180018_20260803_133328.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=S12机场高速K18+050滑行东桥进京, 发生时间=2026-08-03 13:33:28, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11010501071328180018_20260803_133328.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Identify Road Infrastructure Elements**:
+   - The image shows a highway with multiple lanes, cars moving smoothly, and standard road infrastructure like barriers, green fencing, and overhead signage.
+   
+2. **Check for Suspended Items**:
+   - There appears to be a brownish object diagonally crossing the upper right portion of the image. This object does not seem to belong to typical road infrastructure elements listed under "legal traffic facilities."
+   - It doesn't resemble a tree branch, signboard, or part of the bridge's structural components.
+
+3. **Assess Potential Threat**:
+   - The object seems to hang loosely across the scene, which could potentially interfere with vehicle movement or visibility if it were closer to the roadway.
+
+4. **Text Extraction and Analysis**:
+   - No visible text is present on this object; therefore, no further analysis based on textual content is needed.
+
+---
+
+### Conclusion:
+The brownish object appears to be an illegal item hanging above the road, posing potential danger. 
+
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [790, 0, 1931, 1092]
+    ]
+}
+```
+
+This bounding box represents the area occupied by the suspicious object in a normalized 1000x1000 pixel coordinate system., is_committed=0, 所属支队=十支队-顺义执法队
+9. id=922, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110118, 工单编号=camera_11000000001317918454_20260803_133115.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G101京沈线K123+980古北口 出京, 发生时间=2026-08-03 13:31:15, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11000000001317918454_20260803_133115.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Road Infrastructure**: The image shows a road with clear lane markings and some vehicles moving along it. There are no visible overpasses, bridges, or significant road infrastructure elements apart from the road itself.
+
+2. **Vehicles and Moving Targets**: A red truck is seen driving away on the right side of the road. This vehicle does not appear to carry anything unusual or hazardous overhead.
+
+3. **Background Objects**:
+   - Trees line the left side of the road; their branches extend slightly but remain within normal limits without posing a hazard.
+   - No objects are visibly adhering to the walls of roadside buildings or extending into the roadway.
+
+4. **Potential Hazards**:
+   - There appears to be a thin white cable or wire running horizontally across the upper part of the image near the top-right corner. It seems to stretch between two points outside the frame and hangs loosely above the road.
+   - This cable does not resemble standard traffic infrastructure like power lines or communication cables typically found securely mounted.
+
+5. **Text Extraction and Analysis**:
+   - No readable text is present on the potential hazard object.
+
+### Conclusion:
+The horizontal cable-like object above the road could potentially endanger road safety by being loose and improperly installed. Since this does not match typical legal traffic infrastructure and poses a risk, it should be flagged.
+
+### Output:
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [2900, 0, 3800, 100]
+    ]
+}
+```
+
+This bounding box represents the approximate area of the suspicious cable-like object in a normalized 1000x1000 pixel coordinate system., is_committed=0, 所属支队=十支队-密云执法队
+10. id=923, TJ_NAME=擅自占用、挖掘公路, MEASURE=C1900100, UNIT_CODE=110116, 工单编号=camera_11000000001317413709_20260803_163740.jpg, 违法类型=擅自占用、挖掘公路, 发生地点=G111京漠线K80+500后山铺, 发生时间=2026-08-03 16:37:40, 图片路径=http://10.212.160.162:5000/preview/wajue/camera_11000000001317413709_20260803_163740.jpg, OffsiteRule_id=6b50c0ae92ef4b94880443a6b362e731, model_output=```json
+{"result": "yes", "bounding_boxes": [[947, 468, 1999, 1092]]}
+```
+
+### Explanation:
+
+- **Condition 1:** The image clearly shows ongoing excavation or occupation activity near the fenced-off area. A construction vehicle appears to be actively working inside this zone.
+  
+- **Condition 2:** The surrounding area has visible construction-related signs, including green fencing, traffic cones, and piles of materials consistent with excavation or construction work.
+
+- **Condition 3:** Although no individuals are distinctly visible directing the work, the context strongly suggests active participation given the setup and machinery present.
+
+No emergency vehicles like ambulances or police cars are observed, so the critical priority filter does not apply here. Thus, based on the analysis, the scene meets the specified criteria for ongoing road occupation/excavation activity., is_committed=1, 所属支队=十支队-怀柔执法队
+11. id=924, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110118, 工单编号=camera_11000000001319336558_20260803_151733.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G234兴阳线K116+194四合堂, 发生时间=2026-08-03 15:17:33, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11000000001319336558_20260803_151733.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Road Infrastructure Review**:
+   - The image shows a clear road with no visible obstructions like vehicles or pedestrians.
+   - There are no apparent overhangs or installations directly above the road surface.
+
+2. **Suspicious Items Check**:
+   - A white horizontal line-like object appears across the upper part of the image, spanning the width of the road. This could potentially be a wire, cable, or some other item.
+   - The object does not appear to be a standard traffic facility like a sign or signal.
+
+3. **Text Extraction and Analysis**:
+   - No readable text is present on this white line-like object; therefore, it cannot be classified based on textual content.
+
+4. **Exclusion Criteria**:
+   - The object does not match typical legal traffic facilities, background objects, or normal infrastructure elements.
+   - It also doesn't align with moving targets or artificial processing traces.
+
+### Conclusion:
+The white horizontal line-like object spans the road and does not fit into the categories of legal or irrelevant items. Therefore, it qualifies as a potential hazard.
+
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [0, 159, 1175, 179]
+    ]
+}
+```, is_committed=0, 所属支队=十支队-密云执法队
+12. id=925, TJ_NAME=擅自占用、挖掘公路, MEASURE=C1900100, UNIT_CODE=110116, 工单编号=camera_11000000001311667671_20260803_182411.jpg, 违法类型=擅自占用、挖掘公路, 发生地点=G111京漠线K67+680河防口隧道 上行-进口, 发生时间=2026-08-03 18:24:11, 图片路径=http://10.212.160.162:5000/preview/wajue/camera_11000000001311667671_20260803_182411.jpg, OffsiteRule_id=6b50c0ae92ef4b94880443a6b362e731, model_output=```json
+{"result": "yes", "bounding_boxes": [[867, 329, 1140, 445]]}
+```
+
+### Explanation:
+
+- **Condition 1:** The image clearly shows ongoing excavation or occupation activity near the center-right side of the road. There appears to be exposed earth and uneven surfaces indicating active work being done.
+  
+- **Condition 2:** Surrounding this area, there are visible construction-related signs like barriers, fencing materials, and possibly traffic cones placed along the edges of the excavation site. These elements suggest controlled access and safety measures typical of construction sites.
+  
+- **Condition 3:** While no individuals are distinctly visible directing the work, the setup strongly implies human involvement given the organized nature of the barriers and the state of the excavation.
+
+Thus, based on the analysis, the scene meets all specified criteria for recognizing ongoing road occupation or excavation activities., is_committed=1, 所属支队=十支队-怀柔执法队
+13. id=926, TJ_NAME=造成公路路面损坏、污染或者影响公路畅通, MEASURE=C1901100, UNIT_CODE=110116, 工单编号=camera_11000000001317300338_20260803_181851.jpg, 违法类型=在公路上及公路用地范围内堆放物品, 发生地点=S213安四路K71+900杏树台, 发生时间=2026-08-03 18:18:51, 图片路径=http://10.212.160.162:5000/preview/wupin/camera_11000000001317300338_20260803_181851.jpg, OffsiteRule_id=a3f1b9c8d4e7426fa8b1c0d9e5f3a2b4, model_output=```json
+{"result": "yes", "bounding_boxes": [[614, 705, 758, 790], [614, 846, 758, 945]]}
+``` 
+
+The image shows several bags placed along the side of the road near the white barrier, which qualifies as stacking items on the road area. These bags do not appear to be part of a construction site, nor are they arranged for directing traffic or providing warnings. Therefore, they meet the criteria specified in the task description., is_committed=1, 所属支队=十支队-怀柔执法队
+14. id=927, TJ_NAME=造成公路路面损坏、污染或者影响公路畅通, MEASURE=C1901100, UNIT_CODE=110112, 工单编号=camera_11000000001319569390_20260803_184638.jpg, 违法类型=在公路上及公路用地范围内堆放物品, 发生地点=S202张采路K23+770采林路交叉口北, 发生时间=2026-08-03 18:46:38, 图片路径=http://10.212.160.162:5000/preview/wupin/camera_11000000001319569390_20260803_184638.jpg, OffsiteRule_id=a3f1b9c8d4e7426fa8b1c0d9e5f3a2b4, model_output=```json
+{"result": "yes", "bounding_boxes": [[964, 785, 1225, 1028]]}
+``` 
+
+The image shows a pile of watermelons placed directly on the road surface near a truck. This qualifies as stacking items on the road area., is_committed=1, 所属支队=十支队-通州执法队
+15. id=928, TJ_NAME=在公路用地范围内设置公路标志以外的其他标志, MEASURE=C1901500, UNIT_CODE=110112, 工单编号=camera_11011201071328120052_20260803_165743.jpg, 违法类型=在公路用地范围内设置公路标志以外的其他标志, 发生地点=S15京津高速广场K14+100牛堡屯收费站出口进京（可控）, 发生时间=2026-08-03 16:57:43, 图片路径=http://10.212.160.162:5000/preview/gongbiao/camera_11011201071328120052_20260803_165743.jpg, OffsiteRule_id=219df49be1d44d639fe1f8e9d3aa2e5b, model_output=```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [54, 189, 1206, 347]
+    ],
+    "Content": "东鹏特饮 累了困了 喝东鹏特饮"
+}
+```, is_committed=0, 所属支队=十支队-通州执法队
+16. id=929, TJ_NAME=在公路用地范围内设置公路标志以外的其他标志, MEASURE=C1901500, UNIT_CODE=110112, 工单编号=camera_11011201071328120055_20260803_180806.jpg, 违法类型=在公路用地范围内设置公路标志以外的其他标志, 发生地点=S15京津高速广场K14+100牛堡屯收费站入口出京（可控）, 发生时间=2026-08-03 18:08:06, 图片路径=http://10.212.160.162:5000/preview/gongbiao/camera_11011201071328120055_20260803_180806.jpg, OffsiteRule_id=219df49be1d44d639fe1f8e9d3aa2e5b, model_output=```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [345, 310, 1376, 498]
+    ],
+    "Content": "战马 真正的功能饮料"
+}
+``` 
+
+**Explanation:**  
+The billboard contains an advertisement for a beverage ("战马 真正的功能饮料"), which falls under personal affairs rather than public affairs. Therefore, the result is classified accordingly., is_committed=0, 所属支队=十支队-通州执法队
+17. id=930, TJ_NAME=在公路用地范围内设置公路标志以外的其他标志, MEASURE=C1901500, UNIT_CODE=110112, 工单编号=camera_11011201071328120056_20260803_191630.jpg, 违法类型=在公路用地范围内设置公路标志以外的其他标志, 发生地点=S15京津高速广场K28+960德仁务收费站出口出京（可控）, 发生时间=2026-08-03 19:16:30, 图片路径=http://10.212.160.162:5000/preview/gongbiao/camera_11011201071328120056_20260803_191630.jpg, OffsiteRule_id=219df49be1d44d639fe1f8e9d3aa2e5b, model_output=```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [475, 236, 638, 263]
+    ],
+    "Content": "VOSS"
+}
+```
+
+**Explanation:**  
+The billboard contains the advertisement for VOSS water ("好水喝出健康来 As HEALTHY As VOSS"), which falls under personal affairs since it's promoting a product rather than providing public information about transportation or other official matters., is_committed=0, 所属支队=十支队-通州执法队
+18. id=931, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110116, 工单编号=camera_11000000001317269238_20260803_203658.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G234兴阳线K134+810柏查子, 发生时间=2026-08-03 20:36:58, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11000000001317269238_20260803_203658.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Legal Traffic Facilities**: The visible elements like streetlights, power lines, poles, and traffic markings are standard components of road infrastructure and should be disregarded according to the guidelines.
+
+2. **Background Objects**: Trees with branches and leaves extend into the frame but remain within acceptable limits for natural growth near roadsides. These do not qualify as illegal items.
+
+3. **Road Infrastructure**: The visible pipes along the bridge appear securely attached and show no signs of abnormal suspension or damage.
+
+4. **Irrelevant Details**: Light reflections, shadows, and other minor visual artifacts do not indicate potential hazards.
+
+5. **Moving Targets**: There are no pedestrians or moving vehicles affecting this assessment.
+
+6. **Normal Bridge Phenomena**: No unusual items are observed on the bridge's railings or structures.
+
+---
+
+### Observations:
+Upon careful examination, some thin wires or ropes seem to hang loosely across the road at various points. These could potentially interfere with vehicle movement or visibility, especially given their placement directly above the roadway.
+
+---
+
+### Result:
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [190, 690, 620, 980],
+        [620, 580, 900, 780]
+    ]
+}
+```
+
+The bounding boxes highlight sections where loose wires or ropes appear to cross the road, posing a potential hazard., is_committed=0, 所属支队=十支队-怀柔执法队
+19. id=932, TJ_NAME=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, MEASURE=C1901000, UNIT_CODE=110116, 工单编号=camera_11000000001312018911_20260803_203146.jpg, 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G111京漠线K144+180头道穴隧道出京出口上行, 发生时间=2026-08-03 20:31:46, 图片路径=http://10.212.160.162:5000/preview/xuangua/camera_11000000001312018911_20260803_203146.jpg, OffsiteRule_id=0cc1ea428e61471a8f7969e047774e9e, model_output=### Analysis Process:
+
+1. **Identify Road Infrastructure Elements**:
+   - The image shows two tunnels with bright lights at their entrances.
+   - There are streetlights along the road.
+   - Guardrails line both sides of the road.
+   - A building is visible on the right side near the road.
+
+2. **Check for Suspended Items Above the Road**:
+   - Look for any objects hanging down from above the road surface.
+   - Focus on potential hazards like loose wires, ropes, or decorations.
+
+3. **Examine Potential Hazards**:
+   - A curved object appears to extend across the left lane, resembling a pipe or cable.
+   - This object does not seem to be part of standard road infrastructure and could potentially interfere with vehicle movement.
+
+4. **Determine Legality and Safety Concerns**:
+   - The curved object does not match typical road infrastructure elements listed under "legal traffic facilities."
+   - It poses a risk by being positioned low enough to interfere with vehicles.
+
+### Conclusion:
+The curved object extending into the left lane qualifies as an illegal item hanging above the road, posing a hazard.
+
+### Result:
+```json
+{
+    "result": "yes",
+    "bounding_boxes": [
+        [90, 320, 385, 540]
+    ]
+}
+```, is_committed=0, 所属支队=十支队-怀柔执法队

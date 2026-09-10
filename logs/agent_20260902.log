@@ -1,0 +1,171 @@
+2026-09-02 09:58:32,003 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 09:58:32,005 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 09:58:32,006 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 09:58:32,006 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 09:58:32,007 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-02 09:58:32,007 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 09:58:32,008 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 09:58:32,008 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 09:58:32,008 - agent - INFO - orchestrator.py:51 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 09:58:32,009 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-02 09:58:32,014 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-02 09:58:32,015 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 09:58:32,016 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-02 09:58:32,016 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 09:58:32,017 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-02 09:58:32,019 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-02 10:03:22,107 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:03:22,129 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:03:22,150 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:03:22,167 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:03:22,188 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-02 10:03:22,213 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 10:03:22,234 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 10:03:22,253 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 10:03:22,272 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 10:03:22,278 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-02 10:03:22,281 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-02 10:03:22,282 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 10:03:22,282 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-02 10:03:22,282 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 10:03:22,283 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-02 10:03:22,284 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-02 10:04:10,871 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:04:10,905 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:04:10,923 - agent - INFO - workflow.py:166 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:04:35,178 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:04:35,209 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:04:35,227 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:05:29,326 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:05:29,373 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:05:29,402 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:05:29,437 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:05:29,462 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:05:29,489 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:05:29,510 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:05:29,533 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-02 10:05:29,558 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 10:05:29,582 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 10:05:29,602 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 10:05:29,625 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 10:05:29,630 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-02 10:05:29,632 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-02 10:05:29,633 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 10:05:29,633 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-02 10:05:29,635 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 10:05:29,635 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-02 10:05:29,636 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-02 10:06:52,502 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:06:52,539 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:06:52,592 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:06:52,616 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:06:52,640 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:06:52,646 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=knowledge_query confidence=0.90 reason=命中标准、依据或案例检索表达
+2026-09-02 10:06:52,666 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:06:52,684 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:06:52,704 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 10:06:52,723 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 10:06:52,741 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-02 10:06:52,769 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 10:06:52,787 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 10:06:52,808 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 10:06:52,824 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 10:06:52,829 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-02 10:06:52,832 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-02 10:06:52,832 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 10:06:52,832 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-02 10:06:52,833 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 10:06:52,833 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-02 10:06:52,834 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-02 10:11:03,736 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 10:12:04,578 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），1.0 秒后重试
+2026-09-02 10:12:06,016 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「看下这个图片有没有非法悬挂物行为 【上传图片：图片ID img_c20e24b2d8】」(doc_type=全部)返回 5 条
+2026-09-02 15:43:33,709 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=case_query confidence=1.00 reason=用户明确请求查询特定日期（7月3日）的案例，并指定包括违法和不违法案例。这是一个直接的案例查询（case_query），不涉及图片、报告生成或其他类别。
+2026-09-02 15:45:39,294 - agent - INFO - workflow.py:176 - [langgraph] node=classify_intent intent=knowledge_query confidence=0.85 reason=用户询问「这条违法案例是什么行为」，属于知识查询类请求，但「这条」指代不明确，需要确认具体案例
+2026-09-02 15:57:01,006 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 15:57:01,050 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 15:57:01,077 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 15:57:01,111 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 15:57:01,139 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 15:57:01,145 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=knowledge_query confidence=0.90 reason=命中标准、依据或案例检索表达
+2026-09-02 15:57:01,165 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 15:57:01,184 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 15:57:01,209 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-02 15:57:01,232 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-02 15:57:01,255 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-02 15:57:01,273 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 15:57:01,293 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-02 15:57:01,311 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 15:57:01,334 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-02 15:57:01,340 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-02 15:57:01,343 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-02 15:57:01,344 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 15:57:01,344 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-02 15:57:01,344 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-02 15:57:01,345 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-02 15:57:01,345 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成

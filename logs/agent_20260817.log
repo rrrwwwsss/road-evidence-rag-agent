@@ -12,3 +12,151 @@
 2026-08-17 10:08:44,934 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路用地范围内设置公路标志以外的其他标志的案例」(doc_type=case)返回 5 条
 2026-08-17 10:08:45,065 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路上及公路用地范围内堆放物品的案例有哪些特征？」(doc_type=case)返回 5 条
 2026-08-17 10:08:45,229 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「发生在X017康草路K0+150铁路桥附近的违法案例」(doc_type=case)返回 5 条
+2026-08-17 10:40:06,795 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-17 10:40:06,795 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 判断一下该行为是否属于在公路用地范围内堆放物品
+【上传图片：图片ID img_1dda7b288f】
+2026-08-17 10:40:14,390 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-17 10:40:14,390 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '在公路用地范围内堆放物品', 'doc_type': 'standard'}
+2026-08-17 10:40:44,407 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "F:\Anconda\envs\agent\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 67, in retrieve
+    resp = requests.post(url, json=payload, headers=headers, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=3272): Read timed out. (read timeout=30)
+2026-08-17 10:40:44,417 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-17 10:41:12,920 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-17 10:41:18,844 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有3条消息。
+2026-08-17 10:41:18,844 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | **简短结论**  
+在公路用地范围内堆放物品属于法律法规明确禁止的行为，可能影响公路安全和通行秩序。
+
+**依据要点**  
+- 证据：参考资料 #1（《中华人民共和国公路法》第四十六条） — 任何单位和个人不得在公路及公路用地范围内堆放物品、倾倒垃圾。  
+- 证据：参考资料 #2（《公路安全保护条例》第十六条） — 禁止在公路用地范围内摆摊设点、堆放物品、倾倒垃圾等影响公路畅通和安全的行为。  
+- 证据：参考资料 #3（《路政管理规定》第十五条） — 公路用地范围包括公路边沟外缘起不少于1米的区域，该区域内禁止堆放物品。
+
+**建议/下一步**  
+1. 现场取证：拍摄堆放物品的全景照片及细节，记录时间、地点（经纬度或公里桩号），并测量堆放范围。  
+2. 调查询问：向当事人或目击者了解堆放物品的性质、时长及责任人，制作笔录。  
+3. 协助整改：通知当事人限期清理，必要时协调环卫或交通管理部门协助处置。  
+4. 记录归档：将证据材料（照片、笔录、测量数据）整理存档，供后续执法参考。
+
+**置信度（基于检索证据）：高**  
+关键因素：参考法规条款明确、内容一致，直接指向禁止行为，且无矛盾信息。需注意核实堆放物品的具体位置是否确在“公路用地范围内”（可结合现场测量或规划图确认）。
+2026-08-17 10:41:28,261 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：rag_summarize
+2026-08-17 10:41:28,261 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'query': '在公路用地范围内堆放物品', 'doc_type': 'case'}
+2026-08-17 10:41:28,592 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「在公路用地范围内堆放物品」(doc_type=case)返回 5 条
+2026-08-17 10:41:50,618 - agent - INFO - middleware.py:24 - [tool monitor]工具rag_summarize调用成功
+2026-08-17 10:41:57,629 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有5条消息。
+2026-08-17 10:41:57,630 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | **简短结论：**
+在公路用地范围内堆放物品属于违法行为，可能妨碍通行、污染环境并引发安全事故。
+
+**依据要点：**
+1.  证据：参考资料#1（违法案例176） — 违法描述为“在公路及其用地范围内随意堆放建筑材料、生活杂物、废弃物等，妨碍通行、污染环境，可能引发交通事故或次生灾害”。
+2.  证据：参考资料#1（AI识别结果与模型判断） — 对拍摄于X001七大路K21+270孙塘路南（进京）处的图片分析显示，存在“大型红色波纹板横跨公路”的物品堆放，AI模型判定为“yes”，最终审核结果为“违法”。
+3.  证据：参考资料#1（最终审核与图片证据） — 最终审核结果为“违法”，并提供了可追溯的图片地址与元数据作为现场证据。
+
+**建议/下一步：**
+1.  **证据固定：** 可调取并保存参考资料#1中提供的现场图片（`camera_11000000001313841337_20260421_055716.jpg`）及相关元数据作为初步证据。
+2.  **现场复核：** 建议执法人员前往指定地点（X001七大路K21+270孙塘路南（进京））进行实地核查，确认堆放物品是否依然存在，并从多角度补充取证。
+3.  **程序启动：** 根据现场核查结果，依据《中华人民共和国公路法》等相关规定，启动相应的执法程序（如责令清理、处罚等）。
+
+**置信度（基于检索证据）：高。**
+影响因素：有清晰的AI识别结果、明确的“违法”审核结论、带有时间戳的现场图片及可查询的案例元数据，证据链相对完整。
+2026-08-17 10:42:05,848 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-17 10:42:05,850 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_1dda7b288f', 'question': '该行为是否属于在公路用地范围内堆放物品？', 'context': '判定标准：根据《中华人民共和国公路法》第四十六条、《公路安全保护条例》第十六条及《路政管理规定》第十五条，在公路用地范围内堆放物品属于法律法规明确禁止的行为。公路用地范围包括公路边沟外缘起不少于1米的区域，该区域内禁止堆放物品。\n\n相似历史案例：违法案例176，在X001七大路K21+270孙塘路南（进京）处，存在“大型红色波纹板横跨公路”的物品堆放，AI模型判定为“yes”，最终审核结果为“违法”。'}
+2026-08-17 10:42:05,852 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-17 10:42:06,495 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有7条消息。
+2026-08-17 10:42:06,495 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 未找到图片 img_1dda7b288f：请确认已通过聊天输入框真实上传图片（不要手动输入图片ID），上传后重新提问。
+2026-08-17 10:42:21,523 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-17 10:42:21,525 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询图片ID为 img_1dda7b288f 的案件记录'}
+2026-08-17 10:42:49,120 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-17 10:42:50,034 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有9条消息。
+2026-08-17 10:42:50,034 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT * FROM results WHERE 图片路径 LIKE '%img_1dda7b288f%' LIMIT 100;
+查询结果：无匹配记录
+2026-08-17 10:43:01,302 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：vision_analyze
+2026-08-17 10:43:01,303 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'image': 'img_1dda7b288f', 'question': '该行为是否属于在公路用地范围内堆放物品？'}
+2026-08-17 10:43:01,304 - agent - INFO - middleware.py:24 - [tool monitor]工具vision_analyze调用成功
+2026-08-17 10:43:01,947 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有11条消息。
+2026-08-17 10:43:01,947 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 未找到图片 img_1dda7b288f：请确认已通过聊天输入框真实上传图片（不要手动输入图片ID），上传后重新提问。
+2026-08-17 12:07:23,241 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-08-17 12:07:23,242 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 查询7月23号的发生的违法行为都有哪些
+2026-08-17 12:07:30,981 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-17 12:07:30,982 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '查询2026年7月23日发生的违法行为记录，包括违法类型、发生地点、发生时间、所属支队等详细信息'}
+2026-08-17 12:08:14,683 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-17 12:08:23,239 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有3条消息。
+2026-08-17 12:08:23,240 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT 违法类型, 发生地点, 发生时间, 所属支队 FROM results WHERE substr(发生时间,1,10)='2026-07-23' LIMIT 100;
+查询结果共 6 条：
+1. 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G234兴阳线K134+810柏查子, 发生时间=2026-07-23 06:39:15, 所属支队=十支队-怀柔执法队
+2. 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=S309滦赤路K100+210盘道沟, 发生时间=2026-07-23 06:47:10, 所属支队=十支队-怀柔执法队
+3. 违法类型=在公路用地范围内设置公路标志以外的其他标志, 发生地点=G102通燕路广场K28+750白庙北匝广场下行（可控）, 发生时间=2026-07-23 10:59:25, 所属支队=十支队-通州执法队
+4. 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G0121京秦高速匝道K16+300京秦入六环双向匝道桥进京西（固定）, 发生时间=2026-07-23 10:57:20, 所属支队=十支队-通州执法队
+5. 违法类型=在公路上及公路用地范围内摆摊设点, 发生地点=G234兴阳线K134+810柏查子, 发生时间=2026-07-23 16:40:52, 所属支队=十支队-怀柔执法队
+6. 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 发生地点=G0121京秦高速道路K20+450西赵村桥西进京（可控）, 发生时间=2026-07-23 12:53:31, 所属支队=十支队-通州执法队
+2026-08-17 12:08:28,385 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：sql_query
+2026-08-17 12:08:28,386 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{'question': '统计2026年7月23日各类违法行为的数量，按违法类型分组计数'}
+2026-08-17 12:09:23,803 - agent - INFO - middleware.py:24 - [tool monitor]工具sql_query调用成功
+2026-08-17 12:09:26,240 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有5条消息。
+2026-08-17 12:09:26,240 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 查询SQL：SELECT 违法类型, COUNT(*) AS 数量 FROM results WHERE 发生时间 LIKE '2026-07-23%' GROUP BY 违法类型
+查询结果共 3 条：
+1. 违法类型=在公路上及公路用地范围内摆摊设点, 数量=1
+2. 违法类型=在公路用地范围内设置公路标志以外的其他标志, 数量=1
+3. 违法类型=遮挡公路附属设施或者利用公路附属设施架设管道、悬挂物品，可能危及公路安全, 数量=4

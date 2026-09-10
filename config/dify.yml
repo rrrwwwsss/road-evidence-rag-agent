@@ -9,3 +9,10 @@ search_method: semantic_search
 top_k: 5
 score_threshold: 0.0
 score_threshold_enabled: false
+# Dify retrieve API 的 query 最多允许 250 个字符，预留少量余量。
+max_query_chars: 240
+# HTTP 超时与幂等重试：最坏耗时约为 (connect+read)*(max_retries+1)。
+connect_timeout_seconds: 5
+read_timeout_seconds: 60
+max_retries: 1
+retry_backoff_seconds: 1

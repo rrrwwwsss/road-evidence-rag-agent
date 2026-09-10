@@ -22,6 +22,11 @@ SQL_PROMPT_TEXT = """你是SQL专家，根据下面的数据库结构，把用�
 2. 发生时间为文本格式"YYYY-MM-DD HH:MM:SS"，按日期过滤请用 substr(发生时间,1,10)='2026-07-23' 或 发生时间 LIKE '2026-07-23%'。
 3. 若可能返回大量行，请用 LIMIT 100 限制。
 4. 表名与列名必须来自数据库结构，不要臆造。
+5. is_committed 是最终审核状态：1 表示“已确认违法”，0 表示“未确认违法”；不得把 0 表述为“已确认不违法”。
+6. 当用户要求总数并提到“包括违法和不违法”“违法与未确认违法”或要求按审核状态统计时，必须使用条件聚合在同一行返回：
+   - COUNT(*) AS total_count
+   - SUM(CASE WHEN is_committed=1 THEN 1 ELSE 0 END) AS confirmed_violation_count
+   - SUM(CASE WHEN is_committed=0 THEN 1 ELSE 0 END) AS unconfirmed_violation_count
 
 用户问题：{question}
 
@@ -92,6 +97,23 @@ class SqlQueryService:
         sql = re.sub(r"^```(?:sql)?\s*|\s*```$", "", sql, flags=re.M).strip()
         return sql
 
+    @staticmethod
+    def _requires_commitment_breakdown(question: str) -> bool:
+        normalized = question.replace(" ", "")
+        return any(phrase in normalized for phrase in (
+            "违法和不违法", "违法与不违法", "违法和未确认违法", "违法与未确认违法",
+            "包括违法", "分别统计违法", "按审核状态", "审核结果分布",
+        ))
+
+    @staticmethod
+    def _has_commitment_breakdown(columns: list[str]) -> bool:
+        normalized = {column.lower() for column in columns}
+        return {
+            "total_count",
+            "confirmed_violation_count",
+            "unconfirmed_violation_count",
+        }.issubset(normalized)
+
     def _execute(self, sql: str):
         sql = sql.strip().rstrip(";")
         if not re.match(r"^(SELECT|WITH)\b", sql, re.IGNORECASE):
@@ -112,10 +134,34 @@ class SqlQueryService:
     def query(self, question: str) -> str:
         """自然语言问题 -> SQL -> 执行 -> 可读结果。"""
         try:
+            payload = self.query_structured(question)
+        except Exception as e:
+            logger.error(f"[sql_query]查询失败：{e}", exc_info=True)
+            return f"查询失败：{e}"
+
+        sql = payload["sql"]
+        rows = payload["rows"]
+        columns = payload["columns"]
+        if not rows:
+            return f"查询SQL：{sql}\n查询结果：无匹配记录"
+
+        result_lines = [f"查询SQL：{sql}", f"查询结果共 {len(rows)} 条："]
+        for index, row in enumerate(rows[:50], 1):
+            items = ", ".join(f"{col}={row.get(col)}" for col in columns)
+            result_lines.append(f"{index}. {items}")
+
+        if payload["truncated"] or len(rows) > 50:
+            result_lines.append(f"……（共读取{len(rows)}条，仅展示前50条）")
+
+        return "\n".join(result_lines)
+
+    def query_structured(self, question: str) -> dict:
+        """自然语言问题 -> SQL -> 结构化结果；异常由调用方统一处理。"""
+        try:
             sql = self._to_sql(question)
         except Exception as e:
             logger.error(f"[sql_query]SQL生成失败：{e}", exc_info=True)
-            return f"SQL生成失败：{e}"
+            raise RuntimeError(f"SQL生成失败：{e}") from e
 
         try:
             rows, columns = self._execute(sql)
@@ -126,20 +172,33 @@ class SqlQueryService:
                 rows, columns = self._execute(sql)
             except Exception as e2:
                 logger.error(f"[sql_query]SQL修正后仍失败：{e2}", exc_info=True)
-                return f"查询失败：{e2}"
+                raise RuntimeError(f"SQL修正后仍失败：{e2}") from e2
 
-        if not rows:
-            return f"查询SQL：{sql}\n查询结果：无匹配记录"
+        if self._requires_commitment_breakdown(question) and not self._has_commitment_breakdown(columns):
+            logger.warning("[sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成")
+            hint = (
+                "用户要求同时统计总数、已确认违法和未确认违法。必须返回且仅使用别名 "
+                "total_count、confirmed_violation_count、unconfirmed_violation_count，"
+                "并保留原问题中的全部日期和其他筛选条件。"
+            )
+            try:
+                sql = self._to_sql(question, hint)
+                rows, columns = self._execute(sql)
+            except Exception as exc:
+                logger.error("[sql_query]审核状态分类统计重试失败：%s", exc, exc_info=True)
+                raise RuntimeError(f"审核状态分类统计失败：{exc}") from exc
+            if not self._has_commitment_breakdown(columns):
+                raise RuntimeError("生成的SQL未完整返回总数、已确认违法和未确认违法三个统计字段")
 
-        result_lines = [f"查询SQL：{sql}", f"查询结果共 {len(rows)} 条："]
-        for index, row in enumerate(rows[:50], 1):
-            items = ", ".join(f"{col}={row[col]}" for col in columns)
-            result_lines.append(f"{index}. {items}")
-
-        if len(rows) > 50:
-            result_lines.append(f"……（共{len(rows)}条，仅展示前50条）")
-
-        return "\n".join(result_lines)
+        serialized_rows = [{col: row[col] for col in columns} for row in rows]
+        return {
+            "question": question,
+            "sql": sql,
+            "columns": columns,
+            "rows": serialized_rows,
+            "row_count": len(serialized_rows),
+            "truncated": len(rows) >= 200,
+        }
 
 
 if __name__ == '__main__':

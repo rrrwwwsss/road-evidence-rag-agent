@@ -1,0 +1,59 @@
+2026-09-03 15:03:59,993 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=用户明确要求查询案件线索并按时间倒序展示，属于典型的案件查询操作，涉及时间范围和排序条件。
+2026-09-03 15:05:53,481 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.95 reason=用户请求查询近期的案件线索并按时间倒序展示关键信息，属于案件线索查询（case_query）。'近期'为时间范围实体，'时间倒序'为展示排序要求。该请求无需拆分为多个目标，也不存在目标间依赖。
+2026-09-03 15:07:08,673 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:13:38,672 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:32:03,016 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-03 15:32:39,574 - agent - INFO - workflow.py:192 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-03 15:33:39,595 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），1.0 秒后重试
+2026-09-03 15:34:40,631 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-03 15:34:40,631 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时（连接 5s / 读取 60s，第 2 次）），回退本地向量库
+2026-09-03 15:40:09,542 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:09,593 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-03 15:40:09,623 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-03 15:40:09,630 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-03 15:40:09,655 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:09,683 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:09,709 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:09,716 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=knowledge_query confidence=0.90 reason=命中标准、依据或案例检索表达
+2026-09-03 15:40:51,437 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:51,472 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-03 15:40:51,496 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-03 15:40:51,502 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-03 15:40:51,523 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:51,546 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:51,567 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:51,573 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=knowledge_query confidence=0.90 reason=命中标准、依据或案例检索表达
+2026-09-03 15:40:51,595 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:51,615 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-03 15:40:51,637 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-03 15:40:51,658 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-09-03 15:40:51,677 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-09-03 15:40:51,698 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-03 15:40:51,718 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-09-03 15:40:51,740 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-03 15:40:51,761 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-03 15:40:51,767 - agent - ERROR - rag_service.py:75 - [rag_service]本地向量库初始化失败，已禁用本次回退：'RustBindingsAPI' object has no attribute 'bindings'
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\rag_service.py", line 71, in _get_local_retriever
+    self._local_retriever = get_vector_store_service().get_retriever()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+AttributeError: 'RustBindingsAPI' object has no attribute 'bindings'
+2026-09-03 15:40:51,773 - agent - WARNING - rag_service.py:49 - [rag_service]Dify检索失败（Dify 检索读取超时），回退本地向量库
+2026-09-03 15:40:51,774 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-03 15:40:51,774 - agent - ERROR - dify_retriever.py:132 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 2 次），已停止重试
+2026-09-03 15:40:51,775 - agent - WARNING - dify_retriever.py:128 - [DifyRetriever]Dify 检索读取超时（连接 5s / 读取 60s，第 1 次），0.0 秒后重试
+2026-09-03 15:40:51,775 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「测试」(doc_type=全部)返回 0 条
+2026-09-03 15:40:51,776 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-09-03 15:42:29,271 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-09-03 15:42:46,650 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「结合判定标准和历史案例，分析图中行为是否存在擅自占用公路的问题。；图片特征：### 视觉阶段描述 **道路环境与类型：** - 图片显示为一条隧道内的高速公路，具体为北京-G45大广高速的金鼎湖2号隧道，上行方向。 - 隧道内有照明灯、通风设备和交通标志，路面整洁，标线清晰。 **车辆与物品：** - 一辆黄色的小型货车停在隧道右侧车道，车斗内装载有杂物，包括一个红色的袋子。 - 车辆周围放置了多排红白相间的交通锥，用于隔离施工区域或引」(doc_type=case)返回 5 条
+2026-09-03 15:43:43,389 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「结合判定标准和历史案例，分析图中行为是否存在擅自占用公路的问题。 【上传图片：图片ID img_4a74621489】」(doc_type=standard)返回 5 条
+2026-09-03 15:50:25,217 - agent - INFO - workflow.py:194 - [langgraph] node=classify_intent intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-09-03 15:52:04,412 - agent - INFO - dify_retriever.py:179 - [DifyRetriever]查询「统计2026年5月密云执法队的违法案件，并生成一份执法报告草稿。」(doc_type=case)返回 5 条

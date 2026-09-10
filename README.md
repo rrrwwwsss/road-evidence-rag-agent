@@ -1,6 +1,6 @@
 # 非现场取证线索库智能查询系统
 
-> 基于 LangChain ReAct Agent 的道路/现场取证智能查询系统，集成 **RAG 知识库（Dify）**、**SQL 案件数据库查询**、**Qwen-VL 图片违法识别** 与 **执法报告生成**。
+> 基于 LangGraph + Intent-Skill-Tool 分层架构的道路/现场取证智能查询系统，集成 **RAG 知识库（Dify）**、**SQL 案件数据库查询**、**Qwen-VL 图片违法识别** 与 **执法报告生成**。
 
 ---
 
@@ -20,7 +20,7 @@
 
 ## 项目简介
 
-系统面向道路/现场取证、证据检索与执法辅助场景，以 ReAct（Reasoning + Acting）Agent 为核心，根据用户问题自动路由到合适的工具：
+系统面向道路/现场取证、证据检索与执法辅助场景。Intent 层识别一个或多个用户目标与实体，Planner 生成带依赖关系的执行计划，Executor 顺序调用业务 Skill，Skill 再按固定规则调用原子 Tool：
 
 - 🧠 **RAG 知识库检索**：判定标准、法规依据、历史案例相似度（对接 Dify 知识库，支持 `doc_type=standard/case` 元数据过滤）；
 - 🗄️ **SQL 案件查询**：自然语言转只读 SQL，查询案件数据库（计数、按时间/支队/地点/违法类型统计）；
@@ -37,35 +37,37 @@
                 Streamlit Web UI (app.py，支持文字 + 图片上传)
                                │ 用户输入
                                ▼
-                 ReAct Agent (agent/react_agent.py)
+              Intent Classifier（意图与实体识别）
+                               │
+                               ▼
+       LangGraph → Planner → ExecutionPlan → Skill 路由
                                │
           ┌────────────────────┼─────────────────────┐
           ▼                    ▼                     ▼
-   rag_summarize          sql_query           vision_analyze
-   (Dify 知识库检索)      (SQLite 查询)        (Qwen-VL 识别)
+   案件/知识 Skill       图片判定 Skill          报告 Skill
           │                    │                     │
-          └────────────────────┼─────────────────────┘
+          └────────────── Structured Tools ──────────┘
                                ▼
                   生成最终回答 / Markdown 报告
 ```
 
-### ReAct Agent 与工具路由
+### Intent、Skill 与 Tool
 
-Agent 由 `langchain.agents.create_agent` 组装，注册 4 个工具，并根据系统提示词（`prompts/main_prompt.txt`）自动路由：
+`agent/orchestrator.py` 是兼容门面，实际运行时位于 `agent/graph/workflow.py`。LangGraph 将意图识别、计划生成、逐 Skill 路由、依赖跳过和结果汇总编译为独立节点；`agent/planning/` 将多目标请求转换为依赖计划，`agent/executor.py` 提供可由图节点逐步调用的确定性执行能力。`agent/state.py` 保存当前意图、计划、Skill、共享产物、工具结果、证据、错误与事件。业务规则由 Skill 强制执行，不依赖大模型临场选择调用顺序。
 
-| 问题类型 | 路由工具 | 说明 |
+短期上下文记忆保留最近 8 轮用户与助手消息。页面展示历史仍由 Streamlit Session State 保存；Agent 使用的有限消息窗口由 `agent/memory.py` 统一裁剪，写入 `AgentState.recent_messages`，并随 LangGraph checkpoint 保存。单条超长消息会截断，系统提示词和无效角色不会进入会话记忆。
+
+系统采用 **Plan-Execute 为主、Skill 内有限纠错为辅** 的混合模式：清晰请求由规则直接规划；复杂请求可由结构化模型补充目标；执行计划必须通过依赖校验。SQL 修正、检索回退等局部循环均设置次数上限，不允许无限 ReAct。复合请求如“先找图片历史案例，再结合案例判断违法”会执行 `ImageCaseSearchSkill → ImageAssessmentSkill`，并复用前一步案例证据。
+
+| 问题类型 | Skill | 固定调用路径 |
 | --- | --- | --- |
-| 计数/统计/按时间·支队·地点·违法类型查询 | `sql_query(question)` | 自然语言转只读 SQL，查 `data/wupin_tanwei_dabt.db` |
-| 判定标准/法规依据/历史案例相似度 | `rag_summarize(query, doc_type="")` | Dify 检索；`doc_type` 可选 `standard`/`case` |
-| 上传图片识别违法行为 | `vision_analyze(image, question, context="")` | Qwen-VL；`image` 为图片 ID 或 URL |
-| 图片 + “是否属于道路养护”判定 | `rag_summarize` → `vision_analyze` | 强约束：先取 RAG 判定标准再交给视觉模型 |
-| 生成/查询执法报告 | `sql_query` + `rag_summarize` + `fill_context_for_report` | 报告前必须调用 `fill_context_for_report` 切换报告提示词 |
+| 计数/统计/案件明细 | `CaseQuerySkill` | SQL Tool |
+| 判定标准/法规依据/历史案例 | `KnowledgeQuerySkill` | RAG Tool |
+| 根据图片查找相似案例 | `ImageCaseSearchSkill` | Vision 特征提取 → RAG Tool，不作违法认定 |
+| 图片违法或养护判定 | `ImageAssessmentSkill` | RAG Tool → Vision Tool |
+| 执法/取证报告 | `ReportGenerationSkill` | SQL Tool → RAG Tool → 报告生成 |
 
-### 中间件（Middleware）
-
-- `monitor_tool`：记录每次工具调用与参数，并在调用 `fill_context_for_report` 后把运行时上下文 `report` 置为 `True`；
-- `log_before_model`：模型调用前输出日志；
-- `report_prompt_switch`：动态提示词切换，报告场景使用 `prompts/report_prompt.txt`，其余使用 `prompts/main_prompt.txt`。
+Tool 统一返回 `ToolResult`，包含成功状态、结构化数据、证据来源、错误码、耗时和截断状态。报告流程不再使用状态切换伪工具。
 
 ### RAG 知识库（Dify）
 
@@ -81,7 +83,7 @@ Agent 由 `langchain.agents.create_agent` 组装，注册 4 个工具，并根�
 ### 视觉识别
 
 - `rag/vision_service.py` 调用 `qwen-vl-max`（DashScope），支持图片 ID / data URI / URL；
-- 上传图片由前端注册为 `img_xxxx`，随会话持久化。
+- 上传图片由前端生成 `img_xxxx` 标识并保存在当前 Streamlit 会话中；调用 Vision Skill 时通过 LangGraph Runtime Context 显式传入，不依赖跨线程的模块级全局字典，也不会写入 checkpoint。
 
 ---
 
@@ -90,10 +92,24 @@ Agent 由 `langchain.agents.create_agent` 组装，注册 4 个工具，并根�
 ```
 ├── app.py                        # Streamlit 入口（文字 + 图片上传）
 ├── agent/
-│   ├── react_agent.py            # ReAct Agent 组装
+│   ├── react_agent.py            # 保持旧调用方式的兼容门面
+│   ├── orchestrator.py           # Intent → Plan → Execute 编排与异常处理
+│   ├── graph/                     # LangGraph 状态图、节点路由与内存 Checkpointer
+│   ├── executor.py               # 按依赖确定性执行并汇总 Skill 输出
+│   ├── planning/                 # ExecutionPlan / PlanStep 与 Planner
+│   ├── state.py                  # 显式执行状态、共享产物、证据和事件模型
+│   ├── memory.py                 # 最近 8 轮用户/助手消息窗口
+│   ├── intents/                  # 意图分类、实体抽取与数据模型
+│   ├── skills/                   # 文件化 Skill 能力包
+│   │   ├── case_query/           # SKILL.md + prompt.md + handler.py
+│   │   ├── knowledge_query/
+│   │   ├── image_case_search/
+│   │   ├── image_assessment/
+│   │   └── report_generation/
+│   ├── policies/                 # 证据完整性与审核结果约束
 │   └── tools/
-│       ├── agent_tools.py        # 工具定义（rag_summarize / sql_query / vision_analyze / fill_context_for_report）
-│       └── middleware.py         # 工具监控 / 日志 / 提示词切换
+│       ├── contracts.py          # ToolResult / EvidenceSource 契约
+│       └── structured_tools.py   # RAG / SQL / Vision 原子 Tool 适配器
 ├── rag/
 │   ├── rag_service.py            # RAG 汇总（Dify 优先，Chroma 兜底）
 │   ├── dify_retriever.py         # Dify 知识库检索客户端
@@ -108,18 +124,20 @@ Agent 由 `langchain.agents.create_agent` 组装，注册 4 个工具，并根�
 │   ├── dify.yml                  # Dify 知识库配置
 │   └── prompts.yml               # 提示词文件路径
 ├── prompts/
-│   ├── main_prompt.txt           # 系统提示词（工具路由）
-│   ├── rag_summarize.txt         # RAG 汇总提示词
-│   └── report_prompt.txt         # 报告生成提示词
+│   ├── main_prompt.txt           # 一般回答与合规提示词
+│   └── rag_summarize.txt         # RAG Tool 基础汇总提示词
 ├── data/
 │   ├── records.csv               # 案件原始数据
 │   ├── wupin_tanwei_dabt.db      # 案件数据库（SQL 查询数据源）
 │   ├── 违法案例库/*.md           # 知识库案例文档
 │   ├── 道路养护判定标准.md       # 判定标准（Dify 中 doc_type=standard）
 │   └── 公路范围内的合法物品判定标准.md
-├── eval/                         # RAG 检索准确率评估
+├── eval/                         # RAG 与 Intent 评估
 │   ├── eval_retrieval.py
-│   └── test_set.jsonl
+│   ├── test_set.jsonl
+│   ├── eval_intents.py
+│   └── intent_test_set.jsonl
+├── tests/                        # Skill 路径与编排单元测试
 └── 处理代码/                     # 数据处理脚本（csv→md/json、时间戳修正、删表等）
 ```
 
@@ -180,6 +198,9 @@ streamlit run app.py
 
 - 文字输入：直接提问，如「擅自占用公路一共有多少条？」
 - 图片上传：点击聊天输入框的图片按钮上传 jpg/png，然后提问，如「判断一下这是不是道路养护行为」
+- 处理过程：回答生成期间会实时展示可审计事件；点击任一步骤可查看事件类别、状态、时间和用途说明。该区域展示计划、Skill、Tool 与证据处理过程，不展示模型内部隐藏思维链。
+
+前端通过 `ReactAgent.astream_events(version="v2")` 消费兼容事件；底层事件来自 LangGraph 原生 `custom/values` 流。事件包含 `on_chain_start`、`on_custom_event` 和 `on_chain_end`；业务进度统一使用 `agent_progress` 自定义事件，并在会话历史中持久化以便再次展开查看。每个 Streamlit 会话绑定稳定的 LangGraph `thread_id`，进程内 Checkpointer 保存节点状态。工具完成后还会生成脱敏的 `tool_observation`：SQL 展示实际只读语句和前 10 行数据，RAG 展示检索参数、摘要和前 5 条来源，Vision 展示图片 ID、分析模式和结果预览。
 
 ### 示例问题
 
@@ -188,6 +209,7 @@ streamlit run app.py
 - 历史案例：「与擅自占用、挖掘公路类似的历史案例有哪些？」
 - 图片识别：上传图片后问「这张图片是什么违法行为？」
 - 图片判定：上传图片后问「图中行为是否属于道路养护行为？」
+- 复合图片任务：上传图片后问「查找这张图的历史案例，并根据案例和判定标准分析是否存在擅自占用公路行为」
 - 报告生成：「请为2026年5月密云执法队的违法案件生成一份执法报告草稿」
 
 ---
@@ -197,7 +219,7 @@ streamlit run app.py
 | 文件 | 说明 |
 | --- | --- |
 | `config/rag.yml` | `chat_model_name`（对话）、`embedding_model_name`（嵌入）、`vision_model_name`（视觉，如 `qwen-vl-max`） |
-| `config/dify.yml` | Dify `api_base` / `dataset_id` / `search_method` / `top_k` / 阈值 |
+| `config/dify.yml` | Dify `api_base` / `dataset_id` / 检索参数，以及连接超时、读取超时和有限重试配置 |
 | `config/agent.yml` | `sqlite_db_path`：SQL 查询的数据源 |
 | `config/chroma.yml` | 本地向量库 collection / 分块参数 / `k` |
 
@@ -216,12 +238,22 @@ python eval\eval_retrieval.py --dump          # 查看每个问题实际召回
 
 指标：`HitRate@k / Recall@k / Precision@k / MRR / NDCG@k`，按 `doc_type` 分组统计并输出失败样例。详见 `eval/README.md`。
 
+### Intent 与 Skill 路径评测
+
+```powershell
+python eval\eval_intents.py
+python -m unittest discover -s tests -v
+```
+
+第一条命令基于 `eval/intent_test_set.jsonl` 评估规则分类准确率；第二条验证 Intent、实体抽取、Skill 选择，以及图片和报告场景的强制 Tool 调用顺序。
+
 ---
 
 ## 注意事项与安全
 
 - **密钥保护**：`.env` 已加入 `.gitignore`，请勿提交；历史版本中若出现过密钥请尽快轮换；
 - **执法合规**：系统输出仅作为辅助参考，涉及法律定性的结论需「人工/执法部门复核」；
+- **过程可视化边界**：只展示可审计执行事件、工具状态和来源说明，不记录或展示模型隐藏思维链、系统提示词及中间草稿；
 - **数据最小化**：报告与对外输出遵循最小必要原则，仅展示证明性标识（案例编号、图片 URL）；
 - **Dify 依赖**：知识库检索依赖 Dify 服务可用；未配置时回退本地向量库（需要已构建索引）。
 
@@ -229,7 +261,9 @@ python eval\eval_retrieval.py --dump          # 查看每个问题实际召回
 
 ## 技术栈
 
-- LangChain（ReAct Agent / Middleware / RAG Chain）
+- LangChain（结构化模型调用 / RAG Chain）
+- LangGraph（状态图调度 / Skill 路由 / 事件流 / Checkpoint）
+- Plan-Execute（多目标依赖计划）+ Skill 内有限纠错
 - Streamlit（Web UI）
 - Dify（知识库 / 向量检索）
 - DashScope（text-embedding-v4 嵌入、qwen-vl-max 视觉）

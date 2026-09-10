@@ -1,0 +1,235 @@
+2026-08-28 16:33:26,575 - agent - INFO - orchestrator.py:33 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 16:33:28,931 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 68, in retrieve
+    resp.raise_for_status()
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+2026-08-28 16:33:28,933 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-28 16:40:32,145 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 16:40:32,146 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 16:40:32,146 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 16:40:32,147 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 16:40:32,148 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 16:48:01,639 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 16:48:01,994 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 68, in retrieve
+    resp.raise_for_status()
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+2026-08-28 16:48:01,995 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-28 16:50:44,045 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 16:50:44,283 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「查找一下有没有类似的案例
+【上传图片：图片ID img_b8ac9fcbc0】」(doc_type=全部)返回 5 条
+2026-08-28 16:53:28,326 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=case_query confidence=0.95 reason=用户明确表达了其核心诉求是查询“有没有类似案例”，并强调未询问违法性，因此主要意图为案例查询。用户未提及具体时间、地点、案例ID等细节，实体提取结果为空。
+2026-08-28 17:11:05,179 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:11:05,179 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:11:05,179 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:11:05,179 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:11:05,179 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:11:05,181 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:18:12,288 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:18:12,288 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:18:12,288 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:18:12,288 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:18:12,289 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:18:12,289 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:18:45,786 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:18:45,786 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:18:45,786 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:18:45,786 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:18:45,787 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:18:45,787 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:20:13,236 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:20:13,425 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「查找一下有没有类似的案例 
+【上传图片：图片ID img_d5db1378c0】」(doc_type=全部)返回 5 条
+2026-08-28 17:22:21,951 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:22:22,152 - agent - INFO - dify_retriever.py:90 - [DifyRetriever]查询「看看有没有跟这张图片类似的违法案例
+【上传图片：图片ID img_a45ac12b04】」(doc_type=全部)返回 5 条
+2026-08-28 17:27:18,914 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:27:18,915 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:27:18,915 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:27:18,915 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:27:18,915 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:27:18,915 - agent - INFO - orchestrator.py:39 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:29:26,130 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:29:26,132 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:29:26,132 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:29:26,132 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:29:26,132 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:29:26,132 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:31:35,571 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:31:55,810 - agent - ERROR - dify_retriever.py:71 - [DifyRetriever]检索失败：400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\dify_retriever.py", line 68, in retrieve
+    resp.raise_for_status()
+  File "F:\Anconda\envs\agent\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: http://localhost:3272/v1/datasets/6139944f-49de-4acc-b554-ccbf69a7b54e/retrieve
+2026-08-28 17:31:55,812 - agent - WARNING - rag_service.py:41 - [rag_service]Dify检索无结果，回退本地向量库
+2026-08-28 17:36:44,686 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=case_query confidence=0.90 reason=用户请求查找'7.5'相关的违法案例，意图明确为案例查询，但'7.5'的含义不明确，可能是日期、标准条款编号或其他标识符，需要进一步澄清以提高检索准确性。
+2026-08-28 17:37:07,959 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=case_query confidence=0.95 reason=用户明确要求查找特定日期的违法案例，属于案例查询类请求，时间实体为7月5号
+2026-08-28 17:37:27,175 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:37:27,176 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:37:27,176 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:37:27,176 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:37:27,176 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:37:27,177 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:37:27,551 - agent - WARNING - dify_retriever.py:72 - [DifyRetriever]检索词超过 Dify 限制，已从 870 字符压缩到 240 字符
+2026-08-28 17:37:27,749 - agent - INFO - dify_retriever.py:118 - [DifyRetriever]查询「道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施工车辆、交通锥、机械设备、人员和道路标志。道路施工现场，施」(doc_type=case)返回 5 条
+2026-08-28 17:40:09,164 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:43:11,499 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:43:11,499 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:43:11,500 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:43:11,500 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:43:11,500 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:43:11,500 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:43:11,501 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-08-28 17:43:17,918 - agent - ERROR - sql_service.py:163 - [sql_query]SQL生成失败：Connection error.
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_transports\default.py", line 98, in map_httpcore_exceptions
+    yield
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_transports\default.py", line 245, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpcore2\_sync\connection_pool.py", line 242, in handle_request
+    raise exc from None
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpcore2\_sync\connection_pool.py", line 224, in handle_request
+    response = connection.handle_request(pool_request.request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpcore2\_sync\connection.py", line 94, in handle_request
+    raise exc
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpcore2\_sync\connection.py", line 74, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpcore2\_sync\connection.py", line 117, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpcore2\_backends\sync.py", line 203, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpcore2\_exceptions.py", line 17, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore2.ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_base_client.py", line 1087, in request
+    response = self._send_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_client.py", line 491, in _send_request
+    response = self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_client.py", line 469, in _send_with_auth_retry
+    response = super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_base_client.py", line 1010, in _send_request
+    return self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_client.py", line 987, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_client.py", line 1015, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_client.py", line 1050, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_client.py", line 1083, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_transports\default.py", line 244, in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "F:\Anconda\envs\agent\Lib\site-packages\httpx2\_transports\default.py", line 115, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx2.ConnectError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 161, in query_structured
+    sql = self._to_sql(question)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\AI_program\other_project\非现场取证线索库智能查询系统\rag\sql_service.py", line 96, in _to_sql
+    sql = self.chain.invoke({"question": full_question, "schema": self.schema_text()}).strip()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\runnables\base.py", line 3444, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1865, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1672, in generate
+    self._generate_with_cache(
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2010, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_openai\chat_models\base.py", line 1752, in _generate
+    _handle_openai_api_error(e)
+  File "F:\Anconda\envs\agent\Lib\site-packages\langchain_openai\chat_models\base.py", line 1747, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_legacy_response.py", line 369, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_base_client.py", line 1382, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anconda\envs\agent\Lib\site-packages\openai\_base_client.py", line 1122, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+2026-08-28 17:44:25,927 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 17:44:25,928 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:44:25,928 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:44:25,929 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:44:25,929 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:44:25,929 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 17:44:25,932 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-08-28 17:45:49,269 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 17:46:25,319 - agent - INFO - dify_retriever.py:118 - [DifyRetriever]查询「查找一下有没有类似的案例；图片特征：### 视觉阶段描述 **道路环境与位置：** - 图片显示一条双向两车道公路，位于“采林路交叉口北”，K23+770-01 上行方向。 - 公路左侧有绿化带和一座白色护栏的小桥，桥下有小溪流过。 - 公路右侧有茂密的树木，部分遮挡了视线。 - 路边设有交通标志牌，包括限速49和14的圆形标志，以及蓝底白字的“采林路”路牌。 **车辆与机械：** - 道路上有多辆行驶中的汽车，包括一辆白色SUV、一辆」(doc_type=case)返回 5 条
+2026-08-28 17:53:11,578 - agent - INFO - orchestrator.py:40 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 17:53:11,736 - agent - INFO - dify_retriever.py:118 - [DifyRetriever]查询「看下这张图片有没有摆摊设点违法行为 【上传图片：图片ID img_201850af8a】」(doc_type=全部)返回 5 条
+2026-08-28 18:03:43,557 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 18:03:43,559 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-08-28 18:03:43,560 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-08-28 18:03:43,560 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 18:03:43,560 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 18:03:43,560 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 18:03:43,561 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 18:03:43,561 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 18:03:43,563 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-08-28 18:05:00,232 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 18:05:00,233 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-08-28 18:05:00,233 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-08-28 18:05:00,234 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 18:05:00,234 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 18:05:00,236 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 18:05:00,236 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 18:05:00,236 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 18:05:00,238 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
+2026-08-28 18:05:56,642 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=case_query confidence=0.92 reason=命中案件统计或明细查询表达
+2026-08-28 18:05:56,644 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-08-28 18:05:56,644 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.98 reason=检测到图片案例检索与违法判定两个目标
+2026-08-28 18:05:56,645 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_case_search confidence=0.97 reason=检测到图片相似案例检索请求
+2026-08-28 18:05:56,645 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 18:05:56,645 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=image_assessment confidence=0.96 reason=检测到图片或图片分析表达
+2026-08-28 18:05:56,646 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 18:05:56,646 - agent - INFO - orchestrator.py:44 - [orchestrator] intent=report_generation confidence=0.98 reason=命中报告生成关键词
+2026-08-28 18:05:56,648 - agent - WARNING - sql_service.py:178 - [sql_query]首次SQL未覆盖审核状态分类，按强制统计口径重新生成
